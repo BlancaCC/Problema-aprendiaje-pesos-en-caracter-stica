@@ -1,0 +1,244 @@
+\documentclass[11pt,twoside,titlepage,a4paper]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PAQUETES
+%salu2 - Valentino
+\usepackage{xcolor} % Colores
+\usepackage[xcolor]{mdframed} % Marcos
+\usepackage{amsmath} % Matemáticas
+\usepackage{amsfonts} % Letras caligráficas para matemáticas
+\usepackage{mathtools} % Matemáticas extra
+\usepackage{amsthm} % Teoremas
+\usepackage{listingsutf8} % Código
+\usepackage[a4paper]{geometry} % Márgenes
+\usepackage{enumitem} % Opciones de personalización de listas
+\usepackage{fancyhdr} % Encabezado / Pie de página
+\usepackage{titlesec} % Títulos
+\usepackage{pagecolor} % Colorear las portadas
+\usepackage{graphicx} % Imágenes
+\usepackage{hyperref} % Referencias
+\usepackage{sidenotes} % Notas en el margen
+\usepackage{pgfplots} % Gráficos de funciones
+\usepackage{biblatex} % Bibliografía
+\bibliography{bibliografia.bib}
+\usepackage{caption}
+\usepackage{subcaption}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COMANDOS PERSONALIZADOS
+
+% Año o cualquier otra información para la portada
+\newcommand{\fecha}{
+\today
+}
+% Autores del documento
+\newcommand{\autores}{
+ Blanca Cano Camarero
+}
+
+\newcommand{\margenimagen}{
+\newgeometry{
+    left=2.5cm, % Margen izquierdo
+	right=5cm, % Margen derecho
+	bottom=2.5cm % Margen inferior}
+}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TIPOGRAFÍA
+
+\usepackage{heuristica}
+\usepackage[heuristica,vvarbb,bigdelims]{newtxmath}
+\usepackage[T1]{fontenc}
+\renewcommand*\oldstylenums[1]{\textosf{#1}}
+\usepackage[spanish]{babel}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINICIÓN DE COLORES
+
+% COLORES DE LA ESTRUCTURA DEL DOCUMENTO
+%\definecolor{bg_por}{HTML}{8A0808} % Portada
+\definecolor{bg_por}{HTML}{95b2b0} % Portada
+\definecolor{fg_por}{HTML}{FFFFFF} % Texto de la portada
+\definecolor{fg_sec}{HTML}{8A0808} % Títulos de las secciones
+\definecolor{fg_ssec}{HTML}{610505} % Títulos de las subsecciones
+\definecolor{fg_sssec}{HTML}{300303} % Títulos de las subsubsecciones
+\definecolor{fg_head}{HTML}{610B0B} % Texto del encabezado
+% COLORES PARA CÓDIGO
+\definecolor{li_code}{HTML}{8A0808} % Línea a la izquierda
+\definecolor{rw_code}{HTML}{610B0B} % Palabras reservadas
+\definecolor{st_code}{HTML}{300303} % Cadenas de caracteres
+\definecolor{cm_code}{HTML}{333333} % Comentarios
+% COLORES PARA LISTAS
+\definecolor{l_1}{HTML}{8A0808} % Primer símbolo
+\definecolor{l_2}{HTML}{610505} % Primera indentación
+\definecolor{l_3}{HTML}{300303} % Segunda indentación
+\definecolor{l_4}{HTML}{000000} % Tercera indentación
+% COLORES PARA MARCOS
+\definecolor{li_ejs}{HTML}{8A0808} % Línea marco ejemplos
+\definecolor{li_defs}{HTML}{610505} % Línea marco definiciones
+\definecolor{bg_ejs}{HTML}{FFEDEE} % Fondo ejemplos
+\definecolor{bg_defs}{HTML}{FFE0DF} % Fondo definiciones
+% COLORES PARA REFERENCIAS
+\definecolor{fg_url}{HTML}{610505} % Links
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCIAS
+
+\hypersetup{
+	pdftitle={	Implementación de las técnicas de mezcla de regiones usando la ecuación de Poisson}, % Título del pdf
+	pdfauthor={}, % Autor del pdf
+    colorlinks=true, % Referencias con color
+    linkcolor=black, % Color de las referencias internas
+    urlcolor=fg_url, % Color de los links
+    citecolor=fg_ssec, % Color de las referencias
+}
+\urlstyle{same} % Links con el mismo tipo de letra
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TEOREMAS
+
+\numberwithin{equation}{section} % Numeración de ecuaciones
+% Teoremas-Lemas-Definiciones-Corolarios
+\newtheoremstyle{usual} % Nombre del estilo
+{} % Espacio por encima
+{} % Espacio por debajo
+{} % Estilo del cuerpo
+{} % Indentación
+{\bfseries} % Estilo de la cabecera
+{} % Símbolo tras la cabecera
+{ } % Espacio tras la cabecera
+{\thmname{#1}\thmnumber{ #2 }\thmnote{(\textit{#3})}:} % Especificación de la cabecera
+\theoremstyle{usual}
+\newtheorem{theorem}{Teorema}[section] % Comando para los teoremas
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CÓDIGO
+
+\lstset{
+	basicstyle=\footnotesize\ttfamily, % Estilo del código
+	inputencoding=utf8/latin1, % Codificación
+	xleftmargin=1.3em, % Margen extra a la izquierda
+	breaklines=true, % Romper líneas largas
+	language=, % Lenguaje del código
+	numbers=left, % Números de línea
+	numbersep=8pt, % Separación de los números de línea
+	tabsize=4, % Tamaño de los tabs
+	frame=leftline, % Posición del enmarcado
+	framerule=1pt, % Grosor del enmarcado
+	showstringspaces=false, % Mostrar los espacios en las cadenas de caracteres
+	keywordstyle=\color{rw_code}, % Estilo de las palabras reservadas
+	numberstyle=\normalfont, % Estilo de los números de línea
+	rulecolor=\color{li_code}, % Estilo del enmarcado
+	commentstyle=\color{cm_code}, % Estilo de los comentarios
+	stringstyle=\color{st_code} % Estilo de las cadenas de caracteres
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MÁRGENES
+
+\geometry{
+	left=2.5cm, % Margen izquierdo
+	right=2.5cm, % Margen derecho
+	bottom=2.5cm % Margen inferior
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LISTAS/TABLAS
+
+\renewcommand{\arraystretch}{1.3} % Tamaño entre líneas de una tabla
+% SÍMBOLOS LISTAS
+\renewcommand{\labelitemi}{\color{l_1}$\bullet$} % Primer símbolo
+\renewcommand{\labelitemii}{\color{l_2}$\circ$} % Símbolo primera indentación
+\renewcommand{\labelitemiii}{\color{l_3}$\diamond$} % Símbolo segunda indentación
+\renewcommand{\labelitemiv}{\color{l_4}$-$} % Símbolo tercera indentación
+% SÍMBOLOS ENUMERACIONES
+\renewcommand{\labelenumi}{\color{l_1}\bfseries\arabic{enumi}.} % Primer símbolo
+\renewcommand{\labelenumii}{\color{l_2}\bfseries\Roman{enumii}.} % Símbolo primera indentación
+\renewcommand{\labelenumiii}{\color{l_3}\bfseries(\alph{enumiii})} % Símbolo segunda indentación
+\renewcommand{\labelenumiv}{\color{l_4}\bfseries\Alph{enumiv}.} % Símbolo tercera indentación
+% DESCRIPCIONES
+\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}\color{l_1}\textbf{#1}} % Color y estilo del título de la descripción
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ENCABEZADO/PIE DE PAGINA
+
+\setlength{\headheight}{14pt} % Tamaño del encabezado
+\pagestyle{fancy}
+\fancyhf{}
+% Para que aparezca el título de la sección y no el número 
+\renewcommand{\sectionmark}[1]{%
+\markboth{#1}{}}
+% Encabezado
+\fancyhead[LE,RO]{\color{fg_head}{\leftmark}} % A la izquierda en pares, derecha en impares
+\fancyhead[RE,LO]{\color{fg_head}{}} % A la derecha en pares, izquierda en impares
+% Pie de página
+\fancyfoot[LE,RO]{\Large\textbf{\thepage}} % A la izquierda en pares, derecha en impares
+\renewcommand{\headrulewidth}{0.5pt} % Grosor de la línea
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TÍTULOS
+
+% Estilo de las secciones
+\titleformat{\section}
+{\color{fg_sec}\Huge\bfseries}
+{\color{fg_sec}\thesection}{1em}{}
+% Estilo de las subsecciones
+\titleformat{\subsection}
+{\color{fg_ssec}\huge\bfseries}
+{\color{fg_ssec}\thesubsection}{1em}{}
+% Estilo de las subsecciones
+\titleformat{\subsubsection}
+{\color{fg_sssec}\LARGE\bfseries}
+{\color{fg_sssec}\thesubsubsection}{1em}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MISCELÁNEO
+
+\renewcommand{\contentsname}{Índice} % Cambiar el título del índice
+\setlength\parindent{0pt} % Tamaño de la sangría
+
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PORTADA
+
+\begin{titlepage}
+	\newpagecolor{bg_por} % Color de la portada
+	\centering
+	%\includegraphics[width=0.7\textwidth]{imagenes/ugr_logo.jpg} \\ % Logo
+	\vspace{7em}
+	\centering
+	\color{fg_por}{
+	%\title{Implementación de la técnica de mezclado de colores usando la ecuación del Poisson}
+		\fontsize{50pt}{50pt}{\scshape{
+		Técnica de Búsqueda Local\\ 
+        y \\
+        Algoritmos Greedy\\
+        para el Problema del Aprendizaje \\
+        de Pesos 
+        en Características.}} % Título
+	}
+	\vfill
+	\centering
+	\color{fg_por}{\large{\autores}} \\
+	\vspace{2em}
+	\color{fg_por}{\Large{\textit{\fecha}}} \\
+\end{titlepage}
+\restorepagecolor
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ÍNDICE
+
+\newpage
+\tableofcontents
+\newpage
+\listoffigures
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Añadir aquí las respectivas entradas 
+
+
+\end{document}
