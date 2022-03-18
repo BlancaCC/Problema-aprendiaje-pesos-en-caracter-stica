@@ -1,4 +1,4 @@
-name: CI-Neural-Networks-library
+name: CI
 on:
   pull_request:
     branches:
@@ -25,5 +25,5 @@ jobs:
           with:
               version: '1'
         - uses: julia-actions/julia-buildpkg@master
-        - run: make test-library
+        - run: make test-library-workflow
         

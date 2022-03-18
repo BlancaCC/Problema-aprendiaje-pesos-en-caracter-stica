@@ -24,11 +24,15 @@ workflow-spell: install-spell spell
 # Test code 
 install-julia-packages:
 	julia scripts/julia_pkg_instalations.jl
+	
 test-library:
 	julia src/test/datos.test.jl
 
+test-library-workflow: install-julia-packages test-library
+
+
 ## test en general 
-test: spell install-julia-packages test-library
+test: spell 
 
 
 	
