@@ -21,11 +21,14 @@ lazy:
 
 workflow-spell: install-spell spell
 
-# Test biblioteca redes neurales 
+# Test code 
+install-julia-packages:
+	julia scripts/julia_pkg_instalations.jl
 test-library:
 	julia src/test/datos.test.jl
+
 ## test en general 
-test: spell test-library
+test: spell install-julia-packages test-library
 
 
 	
