@@ -13,7 +13,7 @@ La implementación del algoritmo es directa dada la descripción, consistiendo e
     \item Evaluación de la distancia.
 \end{itemize}
 
-\subsection{Algoritmo de entrenamiento}
+\subsection{Algoritmo 1-NN}
 
 Primero crearemos una estructura que almacena los datos y devuelve
 una función dependiente de una función de error 
@@ -30,13 +30,11 @@ y el valor que se desea obtener.
             \item $data:$ Matriz  datos , cada columna un atributo distinto, cada fila los atributos del vector $i$-ésimo.
             \item $labels:$ Clase a la que pertenece cada dato (importa la posición).
         \end{itemize}
-         datos $data$ y etiquetas $label$.
-        
         \hspace*{\algorithmicindent} 
         \textbf{Salida}:
-    Devuelve la clase a la clasifica $c$.        
+    Devuelve la clase a la que clasifica $x$.        
     \begin{algorithmic}[1]
-      \Procedure{One-NN}{$d,x$}
+      \Procedure{OneNN}{$x, dist, data,labels$}
           \State $distanciaMínima \gets\infty$
           \State $clase \leftarrow NADA$
         \For{\texttt{all} $(e_i, c_i) \in data \times labels$}

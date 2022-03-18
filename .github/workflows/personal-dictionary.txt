@@ -9,6 +9,7 @@ Fatih
 ISSN
 Kurugollu
 NN
+OneNN
 Tabu
 Tahir
 basicstyle
@@ -20,6 +21,7 @@ citecolor
 colorlinks
 commentstyle
 defs
+distanciaMínima
 ejs
 enumii
 enumiii
@@ -49,4 +51,3 @@ urlcolor
 utf
 xleftmargin
 ésimo
-distanciaMínima
