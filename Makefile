@@ -25,7 +25,8 @@ workflow-spell: install-spell spell
 install-julia-packages:
 	julia scripts/julia_pkg_instalations.jl
 	
-test-library:
+test-library:		  
+	julia src/test/distancias.test.jl
 	julia src/test/datos.test.jl
 
 test-library-workflow: install-julia-packages test-library
