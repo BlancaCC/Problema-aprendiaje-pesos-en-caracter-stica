@@ -35,6 +35,7 @@ function DataLabelArff(file, class_name)
             Normalize(df[!,"$name"]) 
             for name in attributes
     ]
+    data = reduce(hcat, data)
 
     return data, labels
 end
