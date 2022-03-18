@@ -48,3 +48,5 @@ url
 urlcolor
 utf
 xleftmargin
+ésimo
+distanciaMínima

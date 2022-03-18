@@ -1,0 +1,71 @@
+
+\begin{algorithm}[H]
+    \caption{
+       Creación del clasificador 1-NN
+    }
+    \hspace*{\algorithmicindent} \textbf{Input}:
+    Datos de entrenamiento: matriz datos, cada columan un atributo, etiquetas un vector.
+    $\mathcal{D} = (x_1, y_1), \ldots, (x_n, y_n)$\\
+    \hspace*{\algorithmicindent} \textbf{Output:} error $E_{in}(w)$ y gradiente
+    $g = \{G^{(1)}, \ldots, L\}.$  
+    \begin{algorithmic}[1]
+        \STATE Inicializamos $E_{in}(w)=0$ y $G^{(l)} = 0$ 
+        for $l = 1, \ldots, L.$
+    \end{algorithmic}
+\end{algorithm}
+
+
+
+\begin{algorithm}[H]
+    \caption{
+       Función de evaluación de 1-NN
+    }
+    \hspace*{\algorithmicindent} 
+        \textbf{Input}:
+        distancia a usar $d$, vector a clasificar $v$.\\
+    \hspace*{\algorithmicindent} 
+        \textbf{Output:} Clasificación del vector.
+    \begin{algorithmic}[1]
+        \STATE \COMMENT{Inicializamos las variables auxiliares} \\
+        $distanciaMinima \leftarrow \infty$ \\
+        $clasificada \leftarrow NADA$
+        \STATE \COMMENT{Buscamos mejor vecino}\\
+        \While{$r\not=0$}\Comment{We have the answer if r is 0}
+        \State $a\gets b$
+        \State $b\gets r$
+        \State $r\gets a\bmod b$
+      \EndWhile
+        %Para cada {$(e_i,c_i) \in ConjuntoDatos$}
+        %     \IF {$d(x,e_i) < distanciaMinima$}
+        %    \STATE $distanciaMinima \leftarrow d(x,e_i)$ 
+        %    \STATE   $clasificada \leftarrow c_i$
+    \end{algorithmic}
+\end{algorithm}
+
+
+%%% Algoritmo  bueno 
+
+\begin{algorithm}
+    \caption{Función 1-NN con conjunto de datos $(e,c)$}\label{euclid}
+    \hspace*{\algorithmicindent} 
+        \textbf{Entrada}:
+        Clasifica $x$ en función de la distancia $dist$, datos $data$ y etiquetas $label$.
+        \\
+        \hspace*{\algorithmicindent} 
+        \textbf{Salida}:
+    Devuelve la clase a la clasifica $c$.        
+    \begin{algorithmic}[1]
+      \Procedure{One-NN}{$d,x$}
+        \State $r\gets a\bmod b$
+        \While{$r\not=0$}\Comment{We have the answer if r is 0}
+          \State $distanciaMinima \gets\infty$
+          \State $clasificada \leftarrow NADA$
+          \State $r\gets a\bmod b$
+        \EndWhile\label{euclidendwhile}
+        \For{\texttt{<some condition>}}
+          \State \texttt{<do stuff>}
+        \EndFor
+        \State \textbf{return} $b$\Comment{The gcd is b}
+      \EndProcedure
+    \end{algorithmic}
+  \end{algorithm}

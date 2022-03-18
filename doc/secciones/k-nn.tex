@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%  Descripción del algoritmo de 1-NN
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{ Descripción del algoritmo 1-NN}
+
+Dado un conjunto de datos de entrenamiento etiquetados, se pretende construir un clasificador 
+a partir de devolver la categoría más cercana a los datos ya conocidos. 
+
+La implementación del algoritmo es directa dada la descripción, consistiendo en 
+
+\begin{itemize}
+    \item Almacenamiento adecuado de los datos de entrenamiento.
+    \item Evaluación de la distancia.
+\end{itemize}
+
+\subsection{Algoritmo de entrenamiento}
+
+Primero crearemos una estructura que almacena los datos y devuelve
+una función dependiente de una función de error 
+y el valor que se desea obtener.
+% pseudo código cálculo cálculo de gradiente 
+
+\begin{algorithm}
+    \caption{Algoritmo de  1-NN}\label{euclid}
+    \hspace*{\algorithmicindent} 
+        \textbf{Entrada}:
+        \begin{itemize}
+            \item $x$: Vector a clasificar .
+            \item $dist$: Distancia entre vectores $dist$.
+            \item $data:$ Matriz  datos , cada columna un atributo distinto, cada fila los atributos del vector $i$-ésimo.
+            \item $labels:$ Clase a la que pertenece cada dato (importa la posición).
+        \end{itemize}
+         datos $data$ y etiquetas $label$.
+        
+        \hspace*{\algorithmicindent} 
+        \textbf{Salida}:
+    Devuelve la clase a la clasifica $c$.        
+    \begin{algorithmic}[1]
+      \Procedure{One-NN}{$d,x$}
+          \State $distanciaMínima \gets\infty$
+          \State $clase \leftarrow NADA$
+        \For{\texttt{all} $(e_i, c_i) \in data \times labels$}
+            \If{ $dist(e_i, x) < distanciaMínima$}
+                \State $distanciaMínima \gets dist(e_i, x)$
+                \State $clase  \gets c_i$
+            \EndIf
+        \EndFor
+        \State \textbf{return} $clase$\Comment{Clase en la que se ha clasificado a $x$}
+      \EndProcedure
+    \end{algorithmic}
+  \end{algorithm}
