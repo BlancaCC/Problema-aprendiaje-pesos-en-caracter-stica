@@ -1,11 +1,20 @@
 personal_ws-1.1 es 0 utf-8 
+Atif
+Bouridane
 DF
 FFE
 FFEDEE
 FFFFFF
+Fatih
+ISSN
+Kurugollu
+NN
+Tabu
+Tahir
 basicstyle
 bg
 bibliografia
+biomedicine
 breaklines
 citecolor
 colorlinks
@@ -23,6 +32,7 @@ latin
 leftline
 li
 linkcolor
+multispectral
 numbersep
 numberstyle
 pdfauthor

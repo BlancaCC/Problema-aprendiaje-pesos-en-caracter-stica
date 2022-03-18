@@ -3,7 +3,6 @@ all: compile
 compile:
 	cd doc/ && latexmk -shell-escape -pdf memoria_1.tex
 
-
 clean:
 	find . -name "*.aux" -type f -delete
 	cd doc/ && rm -f *.toc *.out *.lot *.log  *.ind *.ilg *.fls *.fdb_latexmk *.brf *.blg *.bbl *.idx *.lof *.bcf *.xml *.gz
@@ -24,7 +23,7 @@ workflow-spell: install-spell spell
 
 # Test biblioteca redes neurales 
 test-library:
-#	julia Biblioteca-Redes-Neuronales/test/activation_functions.test.jl 
+	julia src/test/datos.test.jl
 ## test en general 
 test: spell test-library
 
