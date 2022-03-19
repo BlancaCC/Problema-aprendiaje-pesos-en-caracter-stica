@@ -1,17 +1,17 @@
-module ModuloOneNN
-export OneNN(x, dist, data, labels)
+module ModuleOneNN
+export OneNN
 
 using Infinity
 """
     One-NN(x, dist, data, labels)
-    Devuelve la clase a la que clasifica $x$ 
+    Devuelve la clase a la que clasifica x
     a partir del vecino más cercano dentro del conjunto de datos.
 """
 function OneNN(x, dist, data, labels)
     distanciaMinima = ∞
     clase = nothing 
     index = 1
-    for elemen in eachrow(data)
+    for element in eachrow(data)
         d = dist(element, x)
         if d < distanciaMinima
             distanciaMinima = d 
