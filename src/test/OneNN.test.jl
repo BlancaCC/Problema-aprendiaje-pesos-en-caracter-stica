@@ -1,11 +1,13 @@
 include("../one-NN.jl")
 include("../distancias.jl")
 include("../validation.jl")
+include("../naive-classifiers/constant.jl")
 
 using Test
 using .ModuleOneNN
 using .ModuleDistances
 using .ModuleValidation
+using .ModuleNaiveClassifiers
 
 data = [-1 0; 1 1; -1 -3; 1 -2; 9 -1; 1 2; 10 20]
 class = ['-', '+',  '-',   '-',  '-', '+' , '+' ]
@@ -30,4 +32,27 @@ l3_test = [CalculateIndex(4,9,i) for i in 1:4 ]
     @test l1 == l1_test
     @test l2 == l2_test
     @test l3 == l3_test
+end
+
+
+@testset "Naive Classifiers" begin 
+    cte = ConstantLearned([1,1,1], [1,2,3])
+    @test cte(123) == 1
+end
+
+@testset "CrossValidation" begin 
+    for tam in 10:15
+        data = rand(tam, tam)
+        label = rand(tam)
+        for folds_number in 1:7
+            time, accuracy = CrossValidation(
+                data,
+                label, 
+                folds_number,
+                ConstantLearned
+            )
+            
+            @test accuracy ≈ 100
+        end
+    end
 end
