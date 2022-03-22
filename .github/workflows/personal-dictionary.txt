@@ -51,3 +51,9 @@ urlcolor
 utf
 xleftmargin
 ésimo
+Nótese
+GeneraVecino
+PrimeroMejor
+numeroMáximoVecinos
+evaluacionesMáximas
+iteracionesMáximas

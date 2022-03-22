@@ -1,0 +1,73 @@
+\section{Algoritmo de búsqueda local}  
+
+Si como distancia en el problema anterior tomamos 
+\begin{equation}
+    d_e(e_1, e_2)
+     = 
+     \sqrt{
+         \sum_i
+             w_i \cdot (e^i_1 - e^i_2)^2  
+        +
+        \sum_j w_j \cdot d_h(e_1^j, e_2^j)
+         }
+\end{equation}
+
+El vector de pesos $w \in [0,1]^n$ es nuestra incógnita
+y deberemos de encontrar el que mejore el clasificador de ponderación 1.
+
+\subsection{Componentes del algoritmo de búsqueda local}  
+
+Las métricas a observar de nuestro algoritmo son: 
+
+\begin{itemize}
+    \item \textbf{Precisión} o \texttt{tasa-clasificación} Rendimiento promedio para $k=1$ y utilizado \textit{leave one out}.
+    \item \textbf{Tasa de reducción}, número de características que se consideran como clasificador. 
+    \begin{equation}
+        \text{tasa-reducción} 
+        = 
+        100
+        \frac{\text{número de }w_i < 0.1}{\text{número de características}}.
+    \end{equation}
+    \item \textbf{Función de evaluación} Permite cuantificar el éxito de nuestra selección de pesos de acorde a una  combinación de precisión y simplicidad, su expresión viene dada por 
+    \begin{equation}
+        F(w) = 
+            \alpha \texttt{tasa-clasificación}
+            +
+            (1 - \alpha) \texttt{tasa-reducción}.
+    \end{equation}
+    Nótese que $\alpha$ es la ponderación de relevancia que se le da al modelo.
+\end{itemize}
+
+\subsection{Búsqueda local del primero mejor}  
+
+El algoritmo que vamos a usar es el conocido como el del \textit{primero mejor} y que radica en esencia de que  cuanto se genera 
+una solución que mejora a la actual se aplica el movimiento y se pasa a la siguiente iteración.
+
+Se detiene la búsqueda cuando se haya generado un número máximo de vecinos que no mejora el resultado.
+
+Descripción del algoritmo, necesitamos primero tener una función para general vecinos, de acorde a los requisitos, esta será 
+la función \texttt{GeneraVecino($w,\sigma$)} que devolverá un vector 
+
+\textcolor{red}{El vector no puede tomar valores negativos} y además serán menor que 1.
+\begin{algorithm}
+    \caption{Búsqueda local del primero mejor}
+    \hspace*{\algorithmicindent} 
+        \textbf{Entrada}:
+        \hspace*{\algorithmicindent} 
+        \textbf{Salida}:
+        Vector de pesos $w$.        
+    \begin{algorithmic}[1]
+      \Procedure{PrimeroMejor}{numeroMáximoVecinos, evaluacionesMáximas}
+            \Comment{Inicializamos pesos}
+          \State $w \gets$ vector aleatorio  
+          \State $iteraciones \gets 0$ \Comment{Indica número de generaciones}
+        \While{iteraciones < iteracionesMáximas}
+
+        \EndWhile
+        \State \textbf{return} $clase$\Comment{Clase en la que se ha clasificado a $x$}
+      \EndProcedure
+    \end{algorithmic}
+  \end{algorithm}
+
+
+
