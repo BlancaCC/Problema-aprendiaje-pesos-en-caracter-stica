@@ -2,6 +2,7 @@ include("../one-NN.jl")
 include("../distancias.jl")
 include("../validation.jl")
 include("../naive-classifiers/constant.jl")
+include("../learner/euclidean-1-NN.jl")
 
 using Test
 using .ModuleOneNN
@@ -15,6 +16,10 @@ class = ['-', '+',  '-',   '-',  '-', '+' , '+' ]
 @testset "Función 1-NN" begin 
     @test OneNN([2,2], EuclideanDistance, data, class ) == '+'
     @test OneNN([-1,-3], EuclideanDistance, data, class ) == '-'
+
+    oneNN_from_learner = LearnerEuclideanOneNN(data, class)
+    @test oneNN_from_learner([2,2]) == '+'
+    @test oneNN_from_learner([-1,-3]) == '-'
 
 end
 
@@ -51,8 +56,18 @@ end
                 folds_number,
                 ConstantLearned
             )
-            
             @test accuracy ≈ 100
         end
     end
+    
+    data = [-1 0; 1 1; -1 -3; 1 -2; 9 -1; 1 2; 10 20]
+    class = ['-', '+',  '-',   '-',  '-', '+' , '+' ]
+    time, accuracy = CrossValidation(
+        data,
+        class,
+       4,
+       LearnerEuclideanOneNN 
+    )
+    @test 0<= accuracy <=100
+
 end
