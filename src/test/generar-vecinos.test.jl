@@ -1,6 +1,7 @@
 using Test 
 include("../algoritmos-busqueda/generar-vecino.jl")
 include("../algoritmos-busqueda/busqueda-local.jl")
+include("../learner/BL-euclidean-1-NN.jl")
 
 @testset "Buscar vecino cambiando todo " begin 
     w = [0.5, 0.5, 0.5]
@@ -36,3 +37,14 @@ end
         @test !(false in map( x-> 0<= x <= 1, w))
     end
 end
+
+@testset "Busqueda local learner" begin 
+    # El último parámetro es "basura"
+    data = [-1 0 1; 1 1 1; -1 -3 1; 1 -2 2; 9 -1 2; 1 2 2; 10 20 1]
+    class = ['-', '+',  '-',   '-',  '-', '+' , '+' ]
+    clasificador, funcion_evaluacion , w = BL_LearnerOneNN(data, class)
+
+    println("función objetivo $funcion_evaluacion")
+    println("Vector final $w")
+
+end 
