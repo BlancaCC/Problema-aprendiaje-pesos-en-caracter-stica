@@ -15,6 +15,18 @@ Si como distancia en el problema anterior tomamos
 El vector de pesos $w \in [0,1]^n$ es nuestra incógnita
 y deberemos de encontrar el que mejore el clasificador de ponderación 1.
 
+Además puesto que no tenemos variables nominales el resultado será
+la distancia final será 
+
+\begin{equation}
+  d_e(e_1, e_2)
+   = 
+   \sqrt{
+       \sum_i
+           w_i \cdot (e^i_1 - e^i_2)^2  
+       }
+\end{equation}
+
 \subsection{Componentes del algoritmo de búsqueda local}  
 
 Las métricas a observar de nuestro algoritmo son: 
@@ -43,7 +55,8 @@ Las métricas a observar de nuestro algoritmo son:
 El algoritmo que vamos a usar es el conocido como el del \textit{primero mejor} y que radica en esencia de que  cuanto se genera 
 una solución que mejora a la actual se aplica el movimiento y se pasa a la siguiente iteración.
 
-Se detiene la búsqueda cuando se haya generado un número máximo de vecinos que no mejora el resultado.
+Se detiene la búsqueda cuando se haya generado un número máximo de vecinos que no mejora el resultado
+o un número máximo de generaciones en las que mejora.
 
 Descripción del algoritmo, necesitamos primero tener una función para general vecinos, de acorde a los requisitos, esta será 
 la función \texttt{GeneraVecino($w,\sigma$)} que devolverá un vector 
@@ -57,14 +70,43 @@ la función \texttt{GeneraVecino($w,\sigma$)} que devolverá un vector
         \textbf{Salida}:
         Vector de pesos $w$.        
     \begin{algorithmic}[1]
-      \Procedure{PrimeroMejor}{numeroMáximoVecinos, evaluacionesMáximas}
+      \Procedure{PrimeroMejor}{$numeroMaximoVecinos$, $evaluacionesMaximas$}
             \Comment{Inicializamos pesos}
           \State $w \gets$ vector aleatorio  
           \State $iteraciones \gets 0$ \Comment{Indica número de generaciones}
-        \While{iteraciones < iteracionesMáximas}
-
+        \While{$iteraciones < iteracionesMaximas$ and  $generaciones < generacionesMaximas $}
+        \State $w_{vecino} \gets$ \texttt{GeneraVecino($w,\sigma$)}
+        \If{ $F(w_{vecino}) > F(w)$}
+          \State $w \gets w_{vecino}$
+          \State $iteraciones \gets 0$ 
+          \State $generaciones \gets generaciones +1$
+        \EndIf
+        \State $iteraciones \gets iteraciones +1$
         \EndWhile
-        \State \textbf{return} $clase$\Comment{Clase en la que se ha clasificado a $x$}
+        \State \textbf{return} $w$
+      \EndProcedure
+    \end{algorithmic}
+  \end{algorithm}
+
+  Para general el vecino hemos usado este algoritmo 
+
+  \begin{algorithm}
+    \caption{Genera nuevo vecino}
+    \hspace*{\algorithmicindent} 
+
+        \textbf{Entrada}: $w$ vector inicio de dimensión $n$. 
+        \hspace*{\algorithmicindent} 
+        \textbf{Salida}:
+        Vector de pesos $w_{vecino}$.        
+    \begin{algorithmic}[1]
+      \Procedure{GeneraVecino}{$w$,}   
+          \State $z \gets \mathcal{N}(0, \sigma)_{1 \times n}$
+          \Comment{vector generado a partir de distribución normal de media 0 y desviación típica $\sigma$}
+        \For{$i \in \{1, \ldots, n\}$}
+        \Comment{Truncamos entre cero y uno cada componente}
+          \State $w_{vecino}[i] \gets \max(0, \min(1, w[i]-z[i]))$
+        \EndFor
+        \State \textbf{return} $w_{vecino}$
       \EndProcedure
     \end{algorithmic}
   \end{algorithm}

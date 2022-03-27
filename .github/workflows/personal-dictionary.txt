@@ -6,10 +6,13 @@ FFE
 FFEDEE
 FFFFFF
 Fatih
+GeneraVecino
 ISSN
 Kurugollu
 NN
+Nótese
 OneNN
+PrimeroMejor
 Tabu
 Tahir
 basicstyle
@@ -26,9 +29,14 @@ ejs
 enumii
 enumiii
 enumiv
+evaluacionesMaximas
+evaluacionesMáximas
 fg
 framerule
+generacionesMaximas
 inputencoding
+iteracionesMaximas
+iteracionesMáximas
 keywordstyle
 latin
 leftline
@@ -37,6 +45,8 @@ linkcolor
 multispectral
 numbersep
 numberstyle
+numeroMaximoVecinos
+numeroMáximoVecinos
 pdfauthor
 pdftitle
 rulecolor
@@ -51,9 +61,3 @@ urlcolor
 utf
 xleftmargin
 ésimo
-Nótese
-GeneraVecino
-PrimeroMejor
-numeroMáximoVecinos
-evaluacionesMáximas
-iteracionesMáximas
