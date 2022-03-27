@@ -69,5 +69,17 @@ end
        LearnerEuclideanOneNN 
     )
     @test 0<= accuracy <=100
+end
 
+
+@testset "Leave one out" begin 
+    
+    data = [-1 0; 1 1; -1 -3; 1 -2; 9 -1; 1 2; 10 20]
+    class = ['-', '+',  '-',   '-',  '-', '+' , '+' ]
+    accuracy = LeaveOneOut(
+        data,
+        class,
+       LearnerEuclideanOneNN 
+    )
+    @test 0<= accuracy <=100
 end

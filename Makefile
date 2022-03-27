@@ -29,6 +29,7 @@ test-library:
 	julia src/test/OneNN.test.jl  
 	julia src/test/distancias.test.jl
 	julia src/test/datos.test.jl
+	julia src/test/generar-vecinos.test.jl
 
 test-library-workflow: install-julia-packages test-library
 

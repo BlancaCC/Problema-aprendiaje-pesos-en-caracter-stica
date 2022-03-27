@@ -1,6 +1,7 @@
 module ModuleValidation
 export CrossValidation
 export CalculateIndex
+export LeaveOneOut
 
 """
     CalculateIndex(fold::Integer, len::Integer, index::Integer)
@@ -69,5 +70,24 @@ function CrossValidation(data, labels, folds_number, learner_algorithm)
     
     return mean_time, mean_accuracy
 end
+
+
+"""
+    LeaveOneOut(data, labels, learner_algorithm)
+"""
+function LeaveOneOut(data, labels, learner_algorithm)
+    # calculate folds 
+    len = length(labels)
+    accuracy = 0
+    for i in 1:len
+        index = union(1:(i-1), (i+1):len)
+        clasificator = learner_algorithm(data[index , :], labels[index])
+
+        accuracy += ( clasificator(data[i]) == labels[i]) ? 0 : 1
+    end
+    accuracy = accuracy*100/len
+    return accuracy
+end
+
 
 end #module 
