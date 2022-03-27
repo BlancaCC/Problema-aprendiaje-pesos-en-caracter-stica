@@ -74,14 +74,14 @@ la función \texttt{GeneraVecino($w,\sigma$)} que devolverá un vector
             \Comment{Inicializamos pesos}
           \State $w \gets$ vector aleatorio  
           \State $iteraciones \gets 0$ \Comment{Indica número de generaciones}
-        \While{$iteraciones < iteracionesMaximas$ and  $generaciones < generacionesMaximas $}
+        \While{$iteraciones < iteracionesMaximas$ and  $evaluaciones< evaluacionesMaximas $}
         \State $w_{vecino} \gets$ \texttt{GeneraVecino($w,\sigma$)}
         \If{ $F(w_{vecino}) > F(w)$}
           \State $w \gets w_{vecino}$
           \State $iteraciones \gets 0$ 
-          \State $generaciones \gets generaciones +1$
         \EndIf
         \State $iteraciones \gets iteraciones +1$
+        \State $evaluaciones \gets evaluaciones +1$
         \EndWhile
         \State \textbf{return} $w$
       \EndProcedure
