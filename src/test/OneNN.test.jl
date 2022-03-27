@@ -1,6 +1,6 @@
-include("../one-NN.jl")
-include("../distancias.jl")
-include("../validation.jl")
+include("../utils/one-NN.jl")
+include("../utils/distancias.jl")
+include("../utils/validation.jl")
 include("../naive-classifiers/constant.jl")
 include("../learner/euclidean-1-NN.jl")
 

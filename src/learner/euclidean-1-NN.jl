@@ -1,5 +1,5 @@
-include("../one-NN.jl")
-include("../distancias.jl")
+include("../utils/one-NN.jl")
+include("../utils/distancias.jl")
 
 using .ModuleOneNN
 using .ModuleDistances

@@ -1,5 +1,5 @@
 using Test 
-include("../distancias.jl")
+include("../utils/distancias.jl")
 using .ModuleDistances
 
 @testset "Distancias" begin 
