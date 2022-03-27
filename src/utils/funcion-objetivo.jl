@@ -10,6 +10,9 @@ CrearFuncionObjetivo(datos, etiquetas, a, umbral_tasa_reduccion::Real)
 
     Devuelve una función  `f(w)` para analizar la bondad de w en base al algoritmo de clasificación 
     1-NN y la reducción que posea.
+    Argumentos: 
+    `a` Coeficiente de la combinación convexa que determina la bondad
+    f(w)= a*tasa aciertos + (1-a) tasa de reducción 
 
 """
 function CrearFuncionObjetivo(datos, etiquetas, a::Real, umbral_tasa_reduccion::Real)
