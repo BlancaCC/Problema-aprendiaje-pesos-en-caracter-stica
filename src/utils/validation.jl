@@ -98,7 +98,7 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
         ]
 
     for i in 1:folds_number
-        println("Comienza la iteración $i de CV para $file_name")
+        println("Comienza la iteración $i/$folds_number de CV para $file_name")
         # select train data and test 
         train_index = filter(
             x-> x<= index[i] || x > index[i+1] , 1:len
@@ -128,6 +128,7 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
         evaluacion = a*accuracy + (1-a)*tasa_reducion
 
         # Guardamos datos que se escribirán en el fichero 
+        println("------------------------------------")
         dfTime[i] = time
         dfAgregacion[i] = evaluacion
         dfClasificacion[i] = accuracy
@@ -140,7 +141,7 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
         println("------------------------------------")
     end
     # Añadimos medias 
-    dfParticion[tamaño] = "Medias"
+    dfParticion[tamaño] = "Medias y (std en caso de pesos)"
     dfTime[tamaño]= mean(dfTime[1:folds_number])
     dfClasificacion[tamaño]= mean(dfClasificacion[1:folds_number])
     dfReduccion[tamaño]= mean(dfReduccion[1:folds_number])
