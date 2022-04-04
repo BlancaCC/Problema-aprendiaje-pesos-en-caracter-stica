@@ -1,7 +1,4 @@
-module ModuleNaiveClassifiers
-export Constant, ConstantLearned
-
 Constant(x)=1
 ConstantLearned(train_data, train_labels) = Constant
 
-end #module
+ConstantLearnerVerbose(train_data, train_labels) = Constant , rand(), train_data[1]

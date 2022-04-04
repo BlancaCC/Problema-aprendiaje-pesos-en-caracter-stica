@@ -1,7 +1,10 @@
-all: compile
+all: compile result
 
+result: 
+	julia src/resultados/1NN.jl
 compile:
 	cd doc/ && latexmk -shell-escape -pdf memoria_1.tex
+
 
 clean:
 	find . -name "*.aux" -type f -delete
@@ -31,6 +34,7 @@ test-library:
 	julia src/test/datos.test.jl
 	julia src/test/generar-vecinos.test.jl
 	julia src/test/funcion-objetivo.test.jl
+	julia src/test/VerboseValidation.test.jl
 
 test-library-workflow: install-julia-packages test-library
 
