@@ -1,13 +1,11 @@
-export BL_LearnerOneNN
-
 include("euclidean-1-NN.jl")
 include("../algoritmos-busqueda/busqueda-local.jl")
 include("../utils/funcion-objetivo.jl")
 
 """
     BL_LearnerOneNN(data::Matrix{<:Real}, labels::Vector{<:Real})
-    Devuelve un clasificado 1-NN refinado por unos pesos en la distancia euclídea. 
-    Ese vector de pesos se ha obtenido a partir de un algoritmo de búsqueda local 
+Devuelve un clasificado 1-NN refinado por unos pesos en la distancia euclídea. 
+Ese vector de pesos se ha obtenido a partir de un algoritmo de búsqueda local 
 """
 function BL_LearnerOneNN(data::Matrix{<:Real}, labels::Vector)
     # Creamos función objetivo 
@@ -19,6 +17,7 @@ function BL_LearnerOneNN(data::Matrix{<:Real}, labels::Vector)
     # Criterios de acorde a los requisitos 
     numero_maximo_vecinos_sin_mejora = 20 * numero_atributos 
     nuero_maximo_evaluaciones = 15000
+    # Buscamos pesos de acorde a parámetros calculados
     w = PrimeroMejor(numero_maximo_vecinos_sin_mejora,
     nuero_maximo_evaluaciones,numero_atributos,umbral_tasa_reduccion, F)
 

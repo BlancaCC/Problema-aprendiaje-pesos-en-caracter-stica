@@ -1,5 +1,3 @@
-module ModuloDatos
-
 export DataLabelArff
 
 using ARFFFiles, DataFrames
@@ -39,5 +37,3 @@ function DataLabelArff(file, class_name)
 
     return data, labels
 end
-
-end # end Module 

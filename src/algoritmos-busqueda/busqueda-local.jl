@@ -1,5 +1,3 @@
-export PrimeroMejor 
-
 include("generar-vecino.jl")
 
 """
@@ -38,7 +36,7 @@ function PrimeroMejor(numero_maximo_vecinos_sin_mejora::Int,
             iteraciones = 0
         else
             # Si no hay mejora se cambia la exploración del atributo
-            indice = indice % (numero_atributos+1)+1
+            indice = indice % (numero_atributos)+1
         end
         iteraciones += 1
         evaluaciones += 1

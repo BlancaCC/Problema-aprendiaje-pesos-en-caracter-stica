@@ -1,4 +1,3 @@
-module ModuleOneNN
 export OneNN
 
 using Infinity
@@ -21,4 +20,3 @@ function OneNN(x, dist, data, labels)
     end
     return clase 
 end
-end #ModuloOneNN

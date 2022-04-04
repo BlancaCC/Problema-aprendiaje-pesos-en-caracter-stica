@@ -1,6 +1,6 @@
 ## Leer datos 
 include("../utils/preprocesado_datos.jl")
-using .ModuloDatos
+include("../utils/validation.jl")
 
 file_path= "src/Instancias_APC/"
 struct DataFile
@@ -16,9 +16,14 @@ files = [
 # Seleccionamos parkinson
 file = files[2]
 data , labels = DataLabelArff(file.route, file.class_atributte)
-
-
-
-## Entrenar para obtejer el peso 
-
+## Entrenar para obtener el peso 
+clasificador, funcion_evaluacion , w = BL_LearnerOneNN(data, labels)
 ## Evaluar resultado con cross validation 
+time, accuracy = CrossValidation(
+        data,
+        labels,
+       5,
+       clasificador
+    )
+
+print()
