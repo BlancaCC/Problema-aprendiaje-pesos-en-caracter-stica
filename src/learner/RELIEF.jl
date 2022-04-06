@@ -57,3 +57,15 @@ function RELIEF(data::Matrix{<:Real}, labels)
 
     return w
 end
+
+function RELIEF_LearnerOneNN(data::Matrix{<:Real}, labels)
+    # Creamos función objetivo 
+    a = 0.5
+    umbral_tasa_reduccion = 0.1
+    F = CrearFuncionObjetivo(data, labels, a, umbral_tasa_reduccion )
+
+    # Buscamos pesos de acorde al algoritmo Greedy
+    w = RELIEF(data, labels)
+
+    return WeightedLearnerEuclideanOneNN(w, data, labels), F(w), w
+end

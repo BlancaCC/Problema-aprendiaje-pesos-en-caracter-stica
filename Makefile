@@ -3,6 +3,7 @@ all: compile
 result: 
 	julia src/resultados/1NN.jl 
 	julia --threads 2 src/resultados/Busqueda-Local.jl 
+	julia --threads 3  src/resultados/Greedy.jl
 compile:
 	cd doc/ && latexmk -shell-escape -pdf memoria_1.tex
 

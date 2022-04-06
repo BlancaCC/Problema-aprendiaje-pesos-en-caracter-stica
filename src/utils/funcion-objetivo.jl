@@ -1,5 +1,3 @@
-export CrearFuncionObjetivo
-
 include("validation.jl")
 include("../learner/euclidean-1-NN.jl")
 

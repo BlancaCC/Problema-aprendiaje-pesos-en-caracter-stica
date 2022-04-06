@@ -99,7 +99,7 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
     index = [ 
         CalculateIndex(folds_number,len,i) for i in 0:folds_number
         ]
-    lk = ReentrantLock() 
+    #lk = ReentrantLock() 
 
     Threads.@threads for i in 1:folds_number
         lock(lk)
