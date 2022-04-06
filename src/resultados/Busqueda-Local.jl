@@ -27,8 +27,8 @@ process_name = [
 ]
 Random.seed!(0)
 println("Procedemos a calcular los datos con $(Threads.nthreads()) hebras disponibles")
-lk_1 = ReentrantLock() 
-Threads.@threads for i in 1:length(files)
+
+for i in 1:length(files)
     # Seleccionamos parkinson
     file = files[i]
     data , labels = DataLabelArff(file.route, file.class_atributte)
