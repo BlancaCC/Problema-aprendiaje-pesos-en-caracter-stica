@@ -1,6 +1,7 @@
 using CSV
 using DataFrames
 using Statistics
+using FLoops
 
 """
     CalculateIndex(fold::Integer, len::Integer, index::Integer)
@@ -70,7 +71,9 @@ function CrossValidation(data, labels, folds_number, learner_algorithm)
     return mean_time, mean_accuracy
 end
 
-
+function MensajeInformativo()
+    
+end
 
 """
     VerboseCrossValidation(data, labels, folds_number, algorithm)
@@ -96,9 +99,12 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
     index = [ 
         CalculateIndex(folds_number,len,i) for i in 0:folds_number
         ]
+    lk = ReentrantLock() 
 
-    for i in 1:folds_number
-        println("Comienza la iteración $i/$folds_number de CV para $file_name")
+    Threads.@threads for i in 1:folds_number
+        lock(lk)
+            println("Comienza la iteración $i/$folds_number de CV para $file_name")
+        unlock(lk)
         # select train data and test 
         train_index = filter(
             x-> x<= index[i] || x > index[i+1] , 1:len
@@ -128,17 +134,21 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
         evaluacion = a*accuracy + (1-a)*tasa_reducion
 
         # Guardamos datos que se escribirán en el fichero 
-        println("------------------------------------")
+       
         dfTime[i] = time
         dfAgregacion[i] = evaluacion
         dfClasificacion[i] = accuracy
         dfReduccion[i] = tasa_reducion
         dfW[i] = w   
-        
-        println("Termina iteración con: 
-        Tiempo: $time  tasa clasificación: $accuracy  tasa reducción: $tasa_reducion agregación: $evaluacion 
-        w = $w")
-        println("------------------------------------")
+        lock(lk)
+        # habría que hacer esto con un cerrojo
+            println("------------------------------------")
+            println("Termina iteración $i/$folds_number de CV para $file_name con: 
+            Tiempo (s): $time  tasa clasificación: $accuracy  tasa reducción: $tasa_reducion agregación: $evaluacion 
+            w = $w")
+            println("------------------------------------")
+        unlock(lk)
+ 
     end
     # Añadimos medias 
     dfParticion[tamaño] = "Medias y (std en caso de pesos)"

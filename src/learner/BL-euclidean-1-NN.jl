@@ -7,7 +7,7 @@ include("../utils/funcion-objetivo.jl")
 Devuelve un clasificado 1-NN refinado por unos pesos en la distancia euclídea. 
 Ese vector de pesos se ha obtenido a partir de un algoritmo de búsqueda local 
 """
-function BL_LearnerOneNN(data::Matrix{<:Real}, labels::Vector)
+function BL_LearnerOneNN(data::Matrix{<:Real}, labels)
     # Creamos función objetivo 
     a = 0.5
     umbral_tasa_reduccion = 0.1

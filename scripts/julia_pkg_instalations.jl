@@ -6,3 +6,4 @@ Pkg.add("DataFrames")
 Pkg.add("Infinity")
 # Para tener una distribución normal
 Pkg.add("Distributions")
+Pkg.add("FLoops")

@@ -2,7 +2,7 @@ all: compile
 
 result: 
 	julia src/resultados/1NN.jl 
-	julia src/resultados/Busqueda-Local.jl 
+	julia --threads 8 src/resultados/Busqueda-Local.jl 
 compile:
 	cd doc/ && latexmk -shell-escape -pdf memoria_1.tex
 
@@ -35,7 +35,7 @@ test-library:
 	julia src/test/datos.test.jl
 	julia src/test/generar-vecinos.test.jl
 	julia src/test/funcion-objetivo.test.jl
-	julia src/test/VerboseValidation.test.jl
+	julia --threads 3 src/test/VerboseValidation.test.jl
 
 test-library-workflow: install-julia-packages test-library
 
