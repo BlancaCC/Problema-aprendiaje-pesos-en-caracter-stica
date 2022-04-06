@@ -1,7 +1,6 @@
 using CSV
 using DataFrames
 using Statistics
-using FLoops
 
 """
     CalculateIndex(fold::Integer, len::Integer, index::Integer)
@@ -20,60 +19,6 @@ l3 = [3,5,7, 9]
 l3_test = [CalculateIndex(4,9,i) for i in 1:4 ]
 """
 CalculateIndex(fold::Integer, len::Integer, index::Integer)=index*floor(Int, len/fold)+((mod(len,fold) >= (index)) ? index : mod(len,fold))
-
-"""
-    CrossValidation(data, labels, folds_number, algorithm)
-Divide el conjunto de datos en `folds_number` particiones disjuntas.
-Repite `folds_number` veces: 
-entrena con `folds_number-1` conjuntos y valida con el restante. 
-
-La validación será la tasa media de acierto, también se evaluará el tiempo.
-"""
-function CrossValidation(data, labels, folds_number, learner_algorithm)
-    # calculate folds 
-    len = length(labels)
-    index = [ 
-        CalculateIndex(folds_number,len,i) for i in 0:folds_number
-        ]
-    mean_time = 0
-    mean_accuracy = 0
-
-    for i in 1:folds_number
-        # select train data and test 
-        train_index = filter(
-            x-> x<= index[i] || x > index[i+1] , 1:len
-        )
-        
-        test_index = (index[i]+1):index[i+1]
-        
-        train_data = data[train_index , :]
-        train_labels = labels[train_index]
-        test_data = data[test_index, :]
-        test_labels = labels[test_index]
-        
-        time = @elapsed begin 
-            # train 
-            clasificator = learner_algorithm(train_data, train_labels)
-            # test
-            estimations =  map(clasificator, test_data)
-        end
-        # get data 
-        errors = sum(estimations .== test_labels)
-        accuracy = (1-errors / (index[i+1] - index[i]+1)) * 100
-        mean_time += time
-        mean_accuracy += accuracy
-        
-    end
-    # Calculate mean metrics
-    mean_time /= folds_number
-    mean_accuracy /= folds_number
-    
-    return mean_time, mean_accuracy
-end
-
-function MensajeInformativo()
-    
-end
 
 """
     VerboseCrossValidation(data, labels, folds_number, algorithm)
@@ -99,7 +44,7 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
     index = [ 
         CalculateIndex(folds_number,len,i) for i in 0:folds_number
         ]
-    #lk = ReentrantLock() 
+    lk = ReentrantLock() 
 
     Threads.@threads for i in 1:folds_number
         lock(lk)
