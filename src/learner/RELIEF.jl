@@ -43,18 +43,22 @@ function RELIEF(data::Matrix{<:Real}, labels)
                     distancia_amigo = distancias[(j,i)][1]
                     indice_amigo = j
                 end
-            else 
+            else
                 if distancias[(j,i)][1] < distancia_enemigo
                     distancia_enemigo = distancias[(j,i)][1]
                     indice_enemigo = j
                 end
             end
         end
-        w = w + map(abs, data[i, :] - data[indice_enemigo, :]) + map(abs,data[i, :] - data[indice_amigo, :])
+        if(indice_amigo != 0)
+            w = w  + map(abs, data[i, :] - data[indice_amigo, :])
+        end 
+        if(indice_enemigo != 0)
+            w = w + map(abs,data[i, :] - data[indice_enemigo, :])
+        end
     end
     w = map(x-> max(0,x), w)
     w = w / maximum(w)
-
     return w
 end
 
