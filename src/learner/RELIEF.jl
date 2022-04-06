@@ -1,4 +1,5 @@
-import "../utils/distancias.jl"
+using Infinity
+include("../utils/distancias.jl")
 """
     RELIEF(data::Matrix{<:Real}, labels)
 Algoritmo greedy para determinar el peso W
@@ -21,7 +22,7 @@ function RELIEF(data::Matrix{<:Real}, labels)
 
     w = zeros(dimensiones[2])
     for i in 1:dimensiones[2]
-        for j in 1:i-1
+        for j in (i+1):dimensiones[2]
             # vemos si es amigo 
             if distancias[(i,j)][2] == true
                 if distancias[(i,j)][1] < distancia_amigo
@@ -35,7 +36,7 @@ function RELIEF(data::Matrix{<:Real}, labels)
                 end
             end
         end
-        for j in (i+1):dimensiones[2]
+        for j in 1:i-1
             # vemos si es amigo 
             if distancias[(j,i)][2] == true
                 if distancias[(j,i)][1] < distancia_amigo
@@ -49,7 +50,7 @@ function RELIEF(data::Matrix{<:Real}, labels)
                 end
             end
         end
-        w = w + abs(data[i, :] - data[indice_enemigo, :]) + abs(data[i, :] - data[indice_amigo, :])
+        w = w + map(abs, data[i, :] - data[indice_enemigo, :]) + map(abs,data[i, :] - data[indice_amigo, :])
     end
     w = map(x-> max(0,x), w)
     w = w / maximum(w)

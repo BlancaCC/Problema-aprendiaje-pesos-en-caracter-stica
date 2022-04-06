@@ -36,6 +36,7 @@ test-library:
 	julia src/test/generar-vecinos.test.jl
 	julia src/test/funcion-objetivo.test.jl
 	julia --threads 3 src/test/VerboseValidation.test.jl
+	julia src/test/Relief.test.jl
 
 test-library-workflow: install-julia-packages test-library
 
