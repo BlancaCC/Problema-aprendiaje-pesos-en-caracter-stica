@@ -26,16 +26,14 @@ process_name = [
     DataFile(csv_file_path*prefijo*"parkinsons.result.csv", "Datos parkinson "),
     DataFile(csv_file_path*prefijo*"spectf-heart.result.csv", "Datos ataques corazón")
 ]
-Random.seed!(0)
+#Random.seed!(0)
 println("Procedemos a calcular los datos con $(Threads.nthreads()) hebras disponibles")
 
 for i in 1:length(files)
     # Seleccionamos parkinson
     file = files[i]
     data , labels = DataLabelArff(file.route, file.class_atributte)
-    index = shuffle(1:length(labels))
-    data = data[index, :]
-    labels = labels[index]
+
     ## Entrenar para obtener el peso 
     println("==============================================")
     println("$(process_name[i].class_atributte)")

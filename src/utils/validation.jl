@@ -32,8 +32,8 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
     umbral_tasa_reduccion=0.1, a = 0.5)
 
     # Datos que vamos a escribir
-    tamaño = folds_number+1
-    dfParticion = map( x -> "Partición $x", 1:tamaño)
+    tamaño = folds_number+2
+    dfParticion = map( x -> "Partición $x", 1:(tamaño))
     dfTime = Array{Float64}(undef, tamaño)
     dfClasificacion = Array{Float64}(undef, tamaño)
     dfReduccion =  Array{Float64}(undef, tamaño)
@@ -80,7 +80,7 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
 
         # Guardamos datos que se escribirán en el fichero 
        
-        dfTime[i] = time
+        dfTime[i] = time*1000
         dfAgregacion[i] = evaluacion
         dfClasificacion[i] = accuracy
         dfReduccion[i] = tasa_reducion
@@ -89,18 +89,28 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
         # habría que hacer esto con un cerrojo
             println("------------------------------------")
             println("Termina iteración $i/$folds_number de CV para $file_name con: 
-            Tiempo (s): $time  tasa clasificación: $accuracy  tasa reducción: $tasa_reducion agregación: $evaluacion 
+            Tiempo (ms): $(dfTime[i])  tasa clasificación: $accuracy  tasa reducción: $tasa_reducion agregación: $evaluacion 
             w = $w")
             println("------------------------------------")
         unlock(lk)
  
     end
     # Añadimos medias 
-    dfParticion[tamaño] = "Medias y (std en caso de pesos)"
+    # Calculamos las medias
+    tamaño -=1
+    dfParticion[tamaño] = "Medias "
     dfTime[tamaño]= mean(dfTime[1:folds_number])
     dfClasificacion[tamaño]= mean(dfClasificacion[1:folds_number])
     dfReduccion[tamaño]= mean(dfReduccion[1:folds_number])
     dfAgregacion[tamaño]= mean(dfAgregacion[1:folds_number])
+    dfW[tamaño]= mean(dfW[1:folds_number])
+    # Calculamos las desviaciones típicas 
+    tamaño += 1
+    dfParticion[tamaño] = "Desviación típica"
+    dfTime[tamaño]= std(dfTime[1:folds_number])
+    dfClasificacion[tamaño]= std(dfClasificacion[1:folds_number])
+    dfReduccion[tamaño]= std(dfReduccion[1:folds_number])
+    dfAgregacion[tamaño]= std(dfAgregacion[1:folds_number])
     dfW[tamaño]= std(dfW[1:folds_number])
 
     # Escribimos en el fichero 

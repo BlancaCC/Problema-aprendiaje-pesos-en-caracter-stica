@@ -1,5 +1,3 @@
-export OneNN
-
 using Infinity
 """
     One-NN(x, dist, data, labels)
@@ -9,14 +7,13 @@ using Infinity
 function OneNN(x, dist, data, labels)
     distanciaMinima = ∞
     clase = nothing 
-    index = 1
-    for element in eachrow(data)
+
+    for (index,element) in enumerate(eachrow(data))
         d = dist(element, x)
         if d < distanciaMinima
             distanciaMinima = d 
             clase = labels[index]
         end
-        index += 1
     end
     return clase 
 end

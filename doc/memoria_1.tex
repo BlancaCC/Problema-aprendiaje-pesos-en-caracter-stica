@@ -39,6 +39,18 @@
 \newcommand{\autores}{
  Blanca Cano Camarero
 }
+% DNI
+\newcommand{\DNI}{
+ 75577392J
+}
+% Email 
+\newcommand{\email}{
+ blancacano@correo.ugr.es
+}
+% Grupo de prácticas 
+\newcommand{\grupo}{
+ Grupo de prácticas 2, lunes.
+}
 
 \newcommand{\margenimagen}{
 \newgeometry{
@@ -232,6 +244,12 @@
 	\centering
 	\color{fg_por}{\large{\autores}} \\
 	\vspace{2em}
+	\color{fg_por}{\large{DNI: \DNI}} \\
+	\vspace{2em}
+	\color{fg_por}{\large{correo: \email}} \\
+	\vspace{2em}
+	\color{fg_por}{\large{\grupo}} \\
+	\vspace{2em}
 	\color{fg_por}{\Large{\textit{\fecha}}} \\
 \end{titlepage}
 \restorepagecolor
@@ -248,6 +266,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% Añadir aquí las respectivas entradas 
+\input{secciones/0_problema}
 \input{secciones/1_preprocesado}
 \input{secciones/2_k-nn}
 \input{secciones/3_busqueda_local}

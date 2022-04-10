@@ -1,6 +1,5 @@
-export DataLabelArff
-
 using ARFFFiles, DataFrames
+using Random
 
 """
     Normalize(vector)
@@ -25,6 +24,7 @@ Se supone que:
 2. Que  el resto son numéricas
 """
 function DataLabelArff(file, class_name)
+    Random.seed!(0)
     df = ARFFFiles.load(DataFrame, file)
     labels = df[!, "$class_name"]
     attributes  = names(df)
@@ -35,5 +35,10 @@ function DataLabelArff(file, class_name)
     ]
     data = reduce(hcat, data)
 
+    # desordenamos los datos 
+    index = shuffle(1:length(labels))
+    data = data[index, :]
+    labels = labels[index]
+    
     return data, labels
 end

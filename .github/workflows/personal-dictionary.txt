@@ -2,6 +2,7 @@ personal_ws-1.1 es 0 utf-8
 Atif
 Bouridane
 DF
+DNI
 FFE
 FFEDEE
 FFFFFF
@@ -12,7 +13,10 @@ Kurugollu
 NN
 Nótese
 OneNN
+Parkinsons
 PrimeroMejor
+SPECT
+Spectf
 Tabu
 Tahir
 basicstyle
@@ -23,12 +27,15 @@ breaklines
 citecolor
 colorlinks
 commentstyle
+computarizada
 defs
 distanciaMínima
 ejs
 enumii
 enumiii
 enumiv
+esPar
+euclidea
 evaluacionesMaximas
 evaluacionesMáximas
 fg
@@ -37,6 +44,7 @@ generacionesMaximas
 inputencoding
 iteracionesMaximas
 iteracionesMáximas
+iésimo
 keywordstyle
 latin
 leftline

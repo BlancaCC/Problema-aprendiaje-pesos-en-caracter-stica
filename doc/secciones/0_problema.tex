@@ -1,0 +1,17 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% DESCRIPCIÓN DEL PROBLEMA 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Descripción del problema}  
+
+El problema de Aprendizaje de Pesos en Características (APC) es un problema de aprendizaje en clasificación para el cual se disponen de una muestra de objetos $\{w_i\}_{1 \leq i \leq N}$ 
+representados en función de sus valores en una serie de atributos dados por $x$:
+\begin{equation*}
+    w_i \text{ tiene asociado el vector de $t$ atributos } (x_1(w_i), \ldots, x_t(w_i)).
+\end{equation*}
+Cada objeto pertenece a una de las $m$ clases existentes 
+$\{C_1, \ldots, C_m\}$.
+
+El objetivo de nuestro problema es poder clasificar cualquier $w$ de un modo automático.
+
+Trataremos de afrontar el problema mediante el algoritmo de clasificación 1-NN, es decir clasificar cierto w a partir de la etiqueta del vector más cercano a él que se conozca.

@@ -28,7 +28,7 @@ y el valor que se desea obtener.
             \item $x$: Vector a clasificar .
             \item $dist$: Distancia entre vectores $dist$.
             \item $data:$ Matriz  datos , cada columna un atributo distinto, cada fila los atributos del vector $i$-ésimo.
-            \item $labels:$ Clase a la que pertenece cada dato (importa la posición).
+            \item $labels:$ Vector de clases a la que pertenece  cada dato (elemento i-ésimo corresponde al dato iésimo).
         \end{itemize}
         \hspace*{\algorithmicindent} 
         \textbf{Salida}:
@@ -37,7 +37,7 @@ y el valor que se desea obtener.
       \Procedure{OneNN}{$x, dist, data,labels$}
           \State $distanciaMínima \gets\infty$
           \State $clase \leftarrow NADA$
-        \For{\texttt{all} $(e_i, c_i) \in data \times labels$}
+        \For{\texttt{all} $(e_i, c_i) \in data \times labels$} \Comment{Recorremos cada vector de atributo con su clase asociada}
             \If{ $dist(e_i, x) < distanciaMínima$}
                 \State $distanciaMínima \gets dist(e_i, x)$
                 \State $clase  \gets c_i$
@@ -46,4 +46,90 @@ y el valor que se desea obtener.
         \State \textbf{return} $clase$\Comment{Clase en la que se ha clasificado a $x$}
       \EndProcedure
     \end{algorithmic}
-  \end{algorithm}
+  \end{algorithm}  
+
+\subsection{Resultados para el 1-NN sin pesos} 
+
+  Para la distancia euclidea sin ninguna ponderación de atributos, es decir, con 
+  $w = (1,\ldots, 1)$ se han obtenido los siguientes resultados: 
+  
+ % \resizebox{\textwidth}{!}{
+
+  \begin{table}[h]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+      \begin{tabular}{|c|c|c|c|c|c|c|}
+     \hline
+     & \multicolumn{2}{|c|}{\textit{Ionosphere}} 
+     & \multicolumn{2}{|c|}{\textit{Parkinsons}} 
+     &\multicolumn{2}{|c|}{\textit{Spectf-heart}}\\
+     \hline
+       & Clasificación  & Tiempo (ms)
+       & Clasificación	& Tiempo (ms)
+       & Clasificación	& Tiempo (ms)
+       \\ \hline
+Partición 1 
+    & 84.507  & 2.258
+    &	94.872 &	0.529
+    & 84.286	& 2.408
+\\
+Partición 2 
+    & 87.143   & 2.238
+    & 100.0	 & 9.314
+    & 78.571	& 9.923
+
+\\
+Partición 3 
+    & 80.0  & 14.370
+    & 94.872 &	0.592 
+    & 81.429 &	2.729
+
+\\
+Partición 4 
+  & 88.571  & 1.929
+  & 92.308 &	0.615 
+  & 85.714 &	2.695
+
+\\
+Partición 5 
+  & 90.0  & 2.323
+  & 97.4359 &	0.513
+  & 82.609 &	2.787
+
+\\ \hline
+Medias 
+  & 86.0442  & 4.623
+  &	95.897 & 2.312
+  & 82.522 & 4.109
+
+\\ \hline
+Desviación típica 
+  & 3.941  & 3.743
+  &	2.923 & 0.023
+  & 2.745 & 3.637
+\\
+  \hline        
+      \end{tabular}
+  }
+      \caption{Métricas de clasificación y tiempo  para el algoritmo 1-NN sin ponderación de pesos en los diferentes conjuntos de datos}
+      \label{Tabla:1nn-base}
+\end{table}
+
+Utilizaremos los resultado de la tabla \ref{Tabla:1nn-base} como base para comparar la bondad de otras técnicas.
+
+\subsubsection*{Reflexiones}  
+
+A la vista de los resultados en clasificación en las tres bases de datos, con más de un $80\%$ de
+ precisión y desviaciones típicas de menos de $4\%$, 
+podría uno dejarse llevar por la particularidad y pensar que el algoritmo $1-$NN es bastante robusto 
+y produce buenos resultados. Sin embargo estos no dejan de ser casos concretos y existirán conjuntos para el que falle, de hecho es fácil pensar un ejemplo: 
+
+Consideramos $esPar:\mathbb{N} \longrightarrow \{0,1\}$
+la regla subyacente que clasifica a nuestros datos y consideramos el conjunto de datos 
+los conjuntos de entrenamiento son los ciclos generados por 
+$<2>+2 = \{2^1, 2^2, 2^3, \ldots\}$ cuya etiqueta es $1$ y por otra parte
+$<11>+11 = \{11, 11^2, 11^3, \ldots\}$ cuya etiqueta claramente es $0$.
+Esta claro que existe el mismo número de números pares que impares, pero ante estos conjuntos es más probable que se clasifique como par.
+
+
+
