@@ -1,6 +1,7 @@
 \section{Algoritmo de búsqueda local}  
 
-Si como distancia en el problema anterior tomamos 
+No es difícil pensar que no todos los atributos tengan la misma relevancia que otros, es por ellos que podría refinarse la distancia usada en $1-$NN por una ponderada como 
+
 \begin{equation}
     d_e(e_1, e_2)
      = 
@@ -28,6 +29,8 @@ la distancia final será
 \end{equation}
 
 \subsection{Componentes del algoritmo de búsqueda local}  
+Además el hecho de poder ponderar la relevancia de los atributos abre la puerta a nuevas oportunidades  como la eliminación de ruido o 
+plantearse un estudio más formar sobre la explicación o relevancia de ciertos atributos a la hora de observar un fenómeno. 
 
 Las métricas a observar de nuestro algoritmo son: 
 
@@ -61,36 +64,10 @@ o un número máximo de generaciones en las que mejora.
 Descripción del algoritmo, necesitamos primero tener una función para general vecinos, de acorde a los requisitos, esta será 
 la función \texttt{GeneraVecino($w,\sigma$)} que devolverá un vector 
 
-\textcolor{red}{El vector no puede tomar valores negativos} y además serán menor que 1.
-\begin{algorithm}
-    \caption{Búsqueda local del primero mejor}
-    \hspace*{\algorithmicindent} 
-        \textbf{Entrada}:
-        \hspace*{\algorithmicindent} 
-        \textbf{Salida}:
-        Vector de pesos $w$.        
-    \begin{algorithmic}[1]
-      \Procedure{PrimeroMejor}{$numeroMaximoVecinos$, $evaluacionesMaximas$}
-            \Comment{Inicializamos pesos}
-          \State $w \gets$ vector aleatorio  
-          \State $iteraciones \gets 0$ \Comment{Indica número de generaciones}
-        \While{$iteraciones < iteracionesMaximas$ and  $evaluaciones< evaluacionesMaximas $}
-        \State $w_{vecino} \gets$ \texttt{GeneraVecino($w,\sigma$)}
-        \If{ $F(w_{vecino}) > F(w)$}
-          \State $w \gets w_{vecino}$
-          \State $iteraciones \gets 0$ 
-        \EndIf
-        \State $iteraciones \gets iteraciones +1$
-        \State $evaluaciones \gets evaluaciones +1$
-        \EndWhile
-        \State \textbf{return} $w$
-      \EndProcedure
-    \end{algorithmic}
-  \end{algorithm}
 
   Para general el vecino hemos usado este algoritmo 
 
-  \begin{algorithm}
+  \begin{algorithm}[H]
     \caption{Genera nuevo vecino}
     \hspace*{\algorithmicindent} 
 
@@ -110,6 +87,90 @@ la función \texttt{GeneraVecino($w,\sigma$)} que devolverá un vector
       \EndProcedure
     \end{algorithmic}
   \end{algorithm}
+
+Denotando además a $F$ por la función de \textit{fitness} se tiene que  
+
+\begin{algorithm}[H]
+  \caption{Búsqueda local del primero mejor}
+  
+      \hspace*{\algorithmicindent} 
+      \textbf{Salida}:
+      Vector de pesos $w$.        
+  \begin{algorithmic}[1]
+    \Procedure{PrimeroMejor}{$numeroMaximoVecinosSinMejora$,
+    $evaluacionesMaximasFuncionObjetivo$
+    $numeroAtributos$, 
+    $umbralAtributo$, 
+    $F$}
+          \Comment{Inicializamos pesos}
+        \State $w \gets$ vector aleatorio  
+        \State $iteracionesSinMejora \gets 0$ \Comment{Indica número de generaciones}
+      \While{$iteracionesSinMejora  < numeroMaximoVecinosSinMejora$ and  $evaluaciones< evaluacionesMaximasFuncionObjetivo$}
+      \State $w_{vecino} \gets$ \texttt{GeneraVecino($w,\sigma$)}
+      \If{ $F(w_{vecino}) > F(w)$}
+        \State $w \gets w_{vecino}$
+        \State $iteracionesSinMejora  \gets 0$ 
+      \EndIf
+      \State $iteracionesSinMejora  \gets iteraciones +1$
+      \State $evaluaciones \gets evaluaciones +1$
+      \EndWhile
+      \State \textbf{return} $w$
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+\subsubsection{Resultados búsqueda local}
+
+\subsubsection*{Ionosphere} 
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    & \multicolumn{4}{|c|}{\textit{Ionosphere}}  \\
+    \hline
+    &	Clasificación &		Reducción	
+    &	Agregación	&	Tiempo en ms \\
+    \hline
+    Partición 1	& 83,099	 & 29,412	& 56,255 & 159947,335 \\
+    Partición 2 &	85,714	 &23,529 &	54,622&	155736,745 \\
+    Partición 3 &	80,0 &	29,412&	54,706 & 141024,197 \\
+    Partición 4	& 90, & 32,353  & 61,176  & 161423,94 \\
+    Partición 5	 &87,143  & 20,588  & 53,866 & 155231,525 \\
+    \hline
+    Medias 	 & 85,191  & 27,059  & 56,125 & 154672,748 \\
+    \hline
+    Desviación típica &	3,825 &	4,833& 2,954 &	8079,714 \\ 
+    \hline  
+  \end{tabular}
+  \caption{Resultados búsqueda local para los datos \textbf{ionosphere}}
+  \label{table:BL_ionosphere}
+\end{table}
+
+Se han analizado a demás los pesos resultantes de cada partición, obteniendo con ello: 
+Un vector de pesos medio con un redondeo de tres decimales es 
+
+\begin{align*}
+w_{medio} = [ 
+  & 0.172; 0.202; 0.451; 0.328; 0.424; 0.655; 0.421; 0.63; 0.766; 0.496; 0.282; 0.477; 0.51;\\
+ & 0.408; 0.656; 0.3; 0.73; 0.677; 0.755; 0.447;
+  0.703; 0.69; 0.568; 0.604; 0.226; 0.658; 0.472; \\
+ & 0.608; 0.344; 0.621; 0.205; 0.328; 0.369; 0.634
+ ]
+\end{align*}
+
+Donde cada coeficiente del vector presenta una desviación típica media de 
+
+\begin{align*}
+  w_{desv. tip.} = [ 
+    & 0.208; 0.415; 0.396; 0.398; 0.386; 0.428; 0.372; 0.477; 0.43; 0.415; 0.434; 0.364; 0.494; 0.514 \\
+& 0.514; 0.481; 0.353; 0.283; 0.411; 0.344; 0.443; 0.216; 0.411; 0.192; 0.534; 0.282; 0.436; 0.298 \\
+& 0.298; 0.38; 0.355; 0.383; 0.168; 0.264; 0.423; 0.44
+   ]
+  \end{align*}
+
+  La media de de las coeficientes de la desviación típica es de $0.377$, esto es un valor bastante elevado teniendo presente de que el rango de valores que pueden tomar los coeficientes de los pesos es de $[0,1]$ sumado a esto y que ninguna de las desviaciones típicas es cercana próxima a $0$, no tenemos ninguna hipótesis de que verdaderamente existan atributos más relevantes que otros para clasificar los datos.
+
 
 
 
