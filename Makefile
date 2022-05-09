@@ -1,6 +1,6 @@
 all: compile
 
-result: 
+result: install-julia-packages
 	julia src/resultados/1NN.jl 
 	julia --threads 2  src/resultados/Greedy.jl
 	julia --threads 2 src/resultados/Busqueda-Local.jl 

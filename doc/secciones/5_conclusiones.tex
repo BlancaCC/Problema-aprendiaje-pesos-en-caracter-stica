@@ -1,0 +1,69 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Valoraciones de todos los resultados
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%      
+
+\section{Comparativa entre los distintos algoritmos}
+
+Todos estamos 
+A continuación expondremos una recopilación de la tasa de clasificación media, reducción media  y tiempo medio.
+
+
+\begin{table}[h]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+      \begin{tabular}{|c|c|c|c|c|c|c| c|c|c| }
+     \hline
+     & \multicolumn{3}{|c|}{\textit{Ionosphere}} 
+     & \multicolumn{3}{|c|}{\textit{Parkinsons}} 
+     &\multicolumn{3}{|c|}{\textit{Spectf-heart}}\\
+     \hline
+       Algoritmo
+       & Clasificación  & Tiempo (ms) & Red.
+       & Clasificación	& Tiempo (ms) & Red.
+       & Clasificación	& Tiempo (ms) & Red. 
+       \\ \hline
+
+    1NN base
+    & 86.0442  & 4.623 & 0
+    &	95.897 & 2.312 & 0
+    & 82.522 & 4.109 & 0
+    \\ \hline
+
+    Búsqueda local
+    & 85.191 & 154672.748 & 27.06
+    & 92.821 & 41035.95 & 23.64
+    & 82.807 & 357893.84 & 20.45
+    \\ \hline
+
+    Greedy
+    & 82.807 & 357893.84 & 0
+    & 83.751 & 49.051 & 2.941
+    & 83.959 & 56.01 & 0
+    \\ \hline
+      
+    \end{tabular}
+    }
+    \caption{Comparativas tasa de clasificación media, reducción media  y tiempo medio distintos algoritmos.}
+    \label{Tabla:comparativas final}
+      
+\end{table}
+
+Para poder comparar la bondad estableceremos primero los criterios 
+y respecto a qué. 
+
+Si el objetivo de nuestro problema era reducir el número de parámetros de acorte
+a cierto compromiso entre tasa de clasificación y reducción \textit{fitness}, está claro 
+que la única alternativa posible es utilizar búsqueda local.
+
+Ya que suponer que el algoritmo \textit{RELIEF} reduciría era demasiado optimista hasta para ser una heurística.
+
+Por su parte si lo que nos interesa es una clasificación buena con un compromiso de tiempo a la vista de estos casos particulares podemos afirmar que 1NN está ofreciendo buenos resultados. 
+
+Y de hecho en el caso de \textit{iosphere} y \textit{Parkinsons} llega incluso a superar al algoritmo voraz, poniendo de manifiesto su patología de no encontrar óptimos. 
+
+Sin embargo, si lo que nos interesase fuera la clasificación sin importar el tiempo
+mi propuesta última sería utilizar el algoritmo de búsqueda local con una función objetivo que busque maximizar la clasificación sin tener en cuenta la reducción de dimensionalidad.
+
+Concluímos también que en estos casos particulares, tras observar los pesos encontrados, el único algoritmo estable con el que poder establecer hipótesis para un estudio estadístico de la relevancia de ciertos atributos es el greedy.
+
+

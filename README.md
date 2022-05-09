@@ -3,6 +3,19 @@
 Se pretende optimizar el clasificador K-NN [1] resolviendo el problema al que llamaremos 
 *Aprendizaje de pesos en características* (APC)[2].
 
+## Estructura
+Los ficheros de scr son los siguientes 
+\begin{itemize}
+    \item \textbf{Instancias APC}: Ficheros con datos.
+    \item \textbf{algoritmos búsqueda}: Generar vecinos. 
+    \item \textbf{learner}: Abstrae algoritmos de búsqueda local.
+    \item \textbf{resultados}: Carpeta con csv de los resultados y los ficheros que los generan.
+    \item \textbf{utils}: Funciones auxiliares útiles.
+\end{itemize}
+
+Para ejecutarlo basta con ejecutar \texttt{make result}.
+
+
 ## Referencias   
 [1] Título: *$K$ vecinos más próximos*. Fuente: *Wikipedia*. URL: https://es.wikipedia.org/wiki/K_vecinos_más_próximos Fecha de consulta: 14-03-22
 

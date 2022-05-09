@@ -43,7 +43,7 @@ Las métricas a observar de nuestro algoritmo son:
         100
         \frac{\text{número de }w_i < 0.1}{\text{número de características}}.
     \end{equation}
-    \item \textbf{Función de evaluación} Permite cuantificar el éxito de nuestra selección de pesos de acorde a una  combinación de precisión y simplicidad, su expresión viene dada por 
+    \item \textbf{Función de evaluación}\label{funcionEvaluacion} Permite cuantificar el éxito de nuestra selección de pesos de acorde a una  combinación de precisión y simplicidad, su expresión viene dada por 
     \begin{equation}
         F(w) = 
             \alpha \texttt{tasa-clasificación}
@@ -88,11 +88,15 @@ la función \texttt{GeneraVecino($w,\sigma$)} que devolverá un vector
     \end{algorithmic}
   \end{algorithm}
 
-Denotando además a $F$ por la función de \textit{fitness} se tiene que  
+El vector generado de manera aleatoria ha sido implementado con la función \texttt{rand}función en Julia.  
+Denotando además a $F$ por la 
+función de \textit{fitness} que responde a la ecuación 
+(\ref{funcionEvaluacion}), 
+donde la \textit{tasa de clasificación} se obtiene por medio del algoritmo de 
+\textit{leave one out} presentado en clase de prácticas.
 
 \begin{algorithm}[H]
   \caption{Búsqueda local del primero mejor}
-  
       \hspace*{\algorithmicindent} 
       \textbf{Salida}:
       Vector de pesos $w$.        
@@ -118,6 +122,10 @@ Denotando además a $F$ por la función de \textit{fitness} se tiene que
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
+
+Notemos que el orden del algoritmo recae en la complejidad de \textit{leave one out}
+que es cuadrático tan cual lo hemos implementado. 
+Pero además siendo estrictos las constantes ocultas son bastante elevadas, ya que serían $\mathcal{O}(K n^2)$ con el máximo de iteraciones que será a lo sumo $15000$ y si tenemos en cuenta que el tamaño de la bases de datos tiene la que más 355 ejemplos, nos estamos enfrentando a un algoritmo que se comporta como un cúbico, luego a priori ya podemos predecir que tardará bastante más que el algoritmo 1NN sin modificación,
 
 \subsubsection{Resultados búsqueda local}
 
@@ -169,7 +177,153 @@ Donde cada coeficiente del vector presenta una desviación típica media de
    ]
   \end{align*}
 
-  La media de de las coeficientes de la desviación típica es de $0.377$, esto es un valor bastante elevado teniendo presente de que el rango de valores que pueden tomar los coeficientes de los pesos es de $[0,1]$ sumado a esto y que ninguna de las desviaciones típicas es cercana próxima a $0$, no tenemos ninguna hipótesis de que verdaderamente existan atributos más relevantes que otros para clasificar los datos.
+  La media de de las coeficientes de la desviación típica es de $0.377$, esto es un valor bastante elevado teniendo presente de que el rango de valores 
+  que pueden tomar los coeficientes de los pesos es de $[0,1]$ 
+  sumado a esto y que ninguna de las desviaciones típicas es
+  próxima a $0$, no tenemos ninguna hipótesis de que verdaderamente 
+  existan atributos más relevantes que otros para clasificar los datos.
+
+
+\subsubsection*{Parkinson} 
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    & \multicolumn{4}{|c|}{\textit{Parkirsons}}  \\
+    \hline
+    &	Clasificación &		Reducción	
+    &	Agregación	&	Tiempo en ms \\
+    \hline
+    Partición 1 & 92.308 &  18.182 &  55.245 &  24649.99  \\
+    Partición 2 &	  97.436 &  18.182 &  57.809 &  34156.963  \\
+    Partición 3 &	  92.308 &  27.273 &  59.79 &  28148.808   \\
+    Partición 4	&   92.308 &  13.636 &  52.972 &  80035.187   \\
+    Partición 5	 &   89.744 &  40.909 &  65.326 &  38188.808   \\
+    \hline
+    Medias 	 &   92.821 &  23.636 &  58.228 &  41035.951   \\
+    \hline
+    Desviación típica &	  2.809 &  10.852 &  4.731 &  22421.782   \\ 
+    \hline  
+  \end{tabular}
+  \caption{Resultados búsqueda local para los datos \textbf{Parkinsons}}
+  \label{table:BL_Parkinson}
+\end{table}
+
+
+El vector de pesos medio es 
+
+\begin{align*}
+  w_{medio} = [ 
+    & 0.355, 0.527, 0.305, 0.407, 0.546, 0.3, 0.454, 0.675, 0.585, 0.709, 0.478, 0.281, 0.553, 0.427 \\
+    & 0.427, 0.451, 0.452, 0.309, 0.747, 0.817, 0.695, 0.644, 0.644]
+  \end{align*}
+  
+  Donde cada coeficiente del vector presenta una desviación típica media de 
+  
+  \begin{align*}
+    w_{desv. tip.} = [ 
+      & 0.33, 0.364, 0.341, 0.364, 0.511, 0.19, 0.4, 0.44, 0.374, 0.288, 0.44, 0.334, 0.514, 0.505 \\
+      & 0.505, 0.508, 0.512, 0.426, 0.359, 0.207, 0.45, 0.368, 0.448
+     ]
+\end{align*}
+
+El valor de peso medio es de $0.516$ y la desviación típica de $0.158$, luego por media todos los pesos son por lo general relevantes. 
+
+Además la media de de las coeficientes de la desviación típica es de $0.394$, esto es un valor bastante elevado teniendo presente de que el rango de valores 
+que pueden tomar los coeficientes de los pesos es de $[0,1]$ 
+sumado a esto y que ninguna de las desviaciones típicas es
+próxima a $0$, no tenemos ninguna hipótesis de que verdaderamente 
+existan atributos más relevantes que otros para clasificar los datos.
+
+
+%%% Estudio para heart attack
+\subsubsection*{Speft heart} 
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+    & \multicolumn{4}{|c|}{\textit{Spectf heart}}  \\
+    \hline
+    &	Clasificación &		Reducción	
+    &	Agregación	&	Tiempo en ms \\
+    \hline
+  
+    Partición 1 &    84.286   &  15.909   &  50.097   &  244436.767   \\
+    Partición 2 &	      77.143   &  25.0   &  51.071   &  336259.139  \\
+    Partición 3 &	     84.286   &  25.0   &  54.643   &  423946.195   \\
+    Partición 4	&     85.714   &  22.727   &  54.221   &  382986.496   \\
+    Partición 5	 &      82.609   &  13.636   &  48.123   &  401840.577   \\
+    \hline
+    Medias 	 &      82.807   &  20.455   &  51.631   &  357893.835   \\
+    \hline
+    Desviación típica &	    3.352   &  5.33   &  2.773   &  71176.609   \\ 
+    \hline  
+  \end{tabular}
+  \caption{Resultados búsqueda local para los datos \textbf{Spectf heart}}
+  \label{table:BL_Spectf-heart}
+\end{table}
+
+
+El vector de pesos medio es 
+
+\begin{align*}
+  w_{medio} = [ 
+    &  0.446, 0.
+    372, 0.574, 0.364, 0.373, 0.502, 0.443, 0.366, 0.545, 0.659, 0.403, 0.698, 0.419, 0.541 \\
+    &  0.541, 0.572, 0.802, 0.65, 0.516, 0.348, 0.315, 0.416, 0.718, 0.292, 0.52, 0.346, 0.471, 0.57  \\
+    &  0.57, 0.098, 0.574, 0.691, 0.646, 0.413, 0.33, 0.624, 0.187, 0.425, 0.451, 0.839, 0.612, 0.523  \\
+    &  0.523, 0.489, 0.676, 0.623, 0.577  
+    ]
+  \end{align*}
+  
+  Donde cada coeficiente del vector presenta una desviación típica media de 
+  
+  \begin{align*}
+    w_{desv. tip.} = [ 
+      &  0.207, 0.305, 0.373, 0.475, 0.35, 0.346, 0.516, 0.322, 0.308, 0.253, 0.401, 0.31, 0.531, 0.345  \\
+      &  0.345, 0.282, 0.192, 0.335, 0.331, 0.39, 0.409, 0.477, 0.308, 0.373, 0.413, 0.21, 0.453, 0.394  \\
+      &  0.394, 0.137, 0.408, 0.436, 0.193, 0.342, 0.42, 0.456, 0.134, 0.389, 0.365, 0.256, 0.482, 0.205  \\
+      & [0.205, 0.339, 0.463, 0.369, 0.37
+     ]
+\end{align*}
+
+El valor de peso medio es de $0.500$ y la desviación típica de $0.155$, luego por media todos los pesos son por lo general relevantes. 
+
+Además la media de de las coeficientes de la desviación típica es de $0.349$, esto es un valor bastante elevado teniendo presente de que el rango de valores 
+que pueden tomar los coeficientes de los pesos es de $[0,1]$ 
+sumado a esto y que ninguna de las desviaciones típicas es
+próxima a $0$, no tenemos ninguna hipótesis de que verdaderamente 
+existan atributos más relevantes que otros para clasificar los datos.
+
+\subsubsection*{ Otras consideraciones }
+Si comparamos los resultados obtenidos en clasificación en comparativa con los del 1NN con la distancia eucídea \ref{Tabla:1nn-base} podemos observar que son peores, esto era esperable ya que la función que estamos optimizando otorga la misma importancia a la tasa de clasificación y a la de reducción.  
+
+Los tiempo han aumentado además considerablemente 
+
+Si utilizamos la métrica 
+\begin{equation}\label{metricaNuevaTiempo}
+    \frac{\text{tiempo búsqueda local}}{\text{tiempo 1NN}} 
+    \times 100
+\end{equation}
+
+De media en ionosfera tenemos un incremento de más de un   $3.346 \times 10^6 \%$ en Parkinsons 
+de $1.775 \times 10^6 \%$ y finalmente de 
+Spectf heart 
+$8.701 \times 10^6 \%$, 
+a la vista de los resultados, cabe cuestionarse duramente si verdaderamente merece la pena tal coste computacional. 
+
+Sin embargo si este tipo de aproximaciones fuera relevante para algún tipo de problema cabría una posibilidad para reducir el coste computacional y es que el cuello de botella reside en el uso del algoritmo de \textit{leave one out} utilizada en el cálculo del \textit{fitness} en \ref{funcionEvaluacion} utilizando técnicas menos precisas como
+  realizar solo \textit{leave one out} para un conjunto menor de datos, por ejemplo la mitad.
+
+
+Respecto al tiempo de cómputo global, también se podría reducir, como hemos hecho nosotros, paralelizando el algoritmo, pero la bondad de esta implementación recaería en en la arquitectura.
+
+  
+
+  
+
 
 
 
