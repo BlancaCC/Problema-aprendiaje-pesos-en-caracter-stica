@@ -1,12 +1,11 @@
 all: compile
 
-result: install-julia-packages
-	julia src/resultados/1NN.jl 
-	julia --threads 2  src/resultados/Greedy.jl
-	julia --threads 2 src/resultados/Busqueda-Local.jl 
+result_p1: #install-julia-packages
+	julia --project=. src/resultados/1NN.jl 
+	julia --project=. --threads 2  src/resultados/Greedy.jl
+	julia --project=. --threads 2 src/resultados/Busqueda-Local.jl 
 compile:
 	cd doc/ && latexmk -shell-escape -pdf memoria_1.tex
-
 
 clean:
 	find . -name "*.aux" -type f -delete
@@ -28,18 +27,18 @@ workflow-spell: install-spell spell
 
 # Test code 
 install-julia-packages:
-	julia scripts/julia_pkg_instalations.jl
+	julia --project=. scripts/julia_pkg_instalations.jl
 	
 test-library:
-	julia src/test/OneNN.test.jl  
-	julia src/test/distancias.test.jl
-	julia src/test/datos.test.jl
-	julia src/test/generar-vecinos.test.jl
-	julia src/test/funcion-objetivo.test.jl
-	julia --threads 3 src/test/VerboseValidation.test.jl
-	julia src/test/Relief.test.jl
+	julia --project=. src/test/OneNN.test.jl  
+	julia --project=. src/test/distancias.test.jl
+	julia --project=. src/test/datos.test.jl
+	julia --project=. src/test/generar-vecinos.test.jl
+	julia --project=. src/test/funcion-objetivo.test.jl
+	julia --project=. --threads 3 src/test/VerboseValidation.test.jl
+	julia --project=. src/test/Relief.test.jl
 
-test-library-workflow: install-julia-packages test-library
+test-library-workflow: test-library
 
 
 ## test en general 

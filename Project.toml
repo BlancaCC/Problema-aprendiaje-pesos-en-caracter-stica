@@ -1,0 +1,8 @@
+[deps]
+ARFFFiles = "da404889-ca92-49ff-9e8b-0aa6b4d38dc8"
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+DataTables = "743a1d0a-8ebc-4f23-814b-50d006366bc6"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+FLoops = "cc61a311-1640-44b5-9fba-1b764f453329"
+Infinity = "a303e19e-6eb4-11e9-3b09-cd9505f79100"
