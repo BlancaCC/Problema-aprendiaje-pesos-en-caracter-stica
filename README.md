@@ -4,7 +4,7 @@ Se pretende optimizar el clasificador K-NN [1] resolviendo el problema al que ll
 *Aprendizaje de pesos en características* (APC)[2].
 
 ## Estructura
-Los ficheros de scr son los siguientes 
+Los ficheros de src son los siguientes 
 \begin{itemize}
     \item \textbf{Instancias APC}: Ficheros con datos.
     \item \textbf{algoritmos búsqueda}: Generar vecinos. 
