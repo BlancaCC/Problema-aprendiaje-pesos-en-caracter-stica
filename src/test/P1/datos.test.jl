@@ -1,6 +1,6 @@
 using Test 
 
-include("../utils/preprocesado_datos.jl")
+include("../../utils/preprocesado_datos.jl")
 
 
 file_path= "src/Instancias_APC/"

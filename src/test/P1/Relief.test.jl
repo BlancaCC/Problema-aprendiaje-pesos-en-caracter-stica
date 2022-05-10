@@ -1,5 +1,5 @@
 using Test
-include("../learner/RELIEF.jl")
+include("../../learner/RELIEF.jl")
 
 data = [-1 0 1; 1 1 1; -1 -3 1; 1 -2 2; 9 -1 2; 1 2 2; 10 20 1]
 labels = ['-', '+',  '-',   '-',  '-', '+' , '+' ]
