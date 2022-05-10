@@ -1,0 +1,50 @@
+%%%%%%%%%%%%%%%%%%%
+%% Operadores de cruce 
+%%%%%%%%%%%%%%%%%
+
+\section{Operadores de cruce}  
+
+\subsection{ Operador de cruce BLX$-\alpha$}  
+
+El pseudo código del operador de cruce creado es 
+
+% Operador de cruce 
+\begin{algorithm}[H]
+    \caption{Operador de cruce BLX$-\alpha$}
+    \hspace*{\algorithmicindent} 
+
+        \textbf{Entrada}:
+        \begin{itemize}
+          \item $C_1 = (c_{1 1}, \ldots, c_{1 n}), C_2=(c_{2 1}, \ldots, c_{2 n})$ 
+          dos vectores de dimensión $n$, que son los cromosomas. 
+          \item  $\alpha \in [0,1]$.
+        \end{itemize}
+        
+        \hspace*{\algorithmicindent} 
+
+        \textbf{Salida}:
+        Dos vectores $H_1, H_2$ de tamaño $n$ que son los descendientes.
+
+    \begin{algorithmic}[1]
+        % Para cada uno de los vectores
+        \For{ $i \in \{1, \ldots, n\}$}
+              \begin{align*}
+                & c_{\max} \gets \max\{ c_{1 i}, c_{2 i}\} \\
+                & c_{\min} \gets \min\{ c_{1 i}, c_{2 i}\} \\
+                & I \gets c_{\max} - c_{\min} 
+              \end{align*}
+          
+              \For{$k \in \{1,2\}$}
+              $$h_{k j} \gets
+              \text{ valor aleatorio perteneciente a } 
+             [c_{min} - I \alpha, c_{max} + I \alpha]$$
+           \EndFor 
+           \EndFor 
+          \For{$k \in \{1,2\}$}
+             $$H_k \gets (h_{k 1}, \ldots, h_{k n}) $$
+          \EndFor 
+          
+       \State \textbf{return} $H_1, H_2$
+    \end{algorithmic}
+  \end{algorithm}
+
