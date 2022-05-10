@@ -1,9 +1,11 @@
 personal_ws-1.1 es 0 utf-8 
 Atif
+BLX
 Bouridane
 DF
 DNI
 DistanciaEuclidea
+EMFE
 FFE
 FFEDEE
 FFFFFF
@@ -99,4 +101,3 @@ utils
 vectorDeCeros
 xleftmargin
 ésimo
-BLX

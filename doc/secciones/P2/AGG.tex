@@ -1,0 +1,100 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Algoritmos genéticos  generalistas 
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{ Algoritmos genéticos}
+\subsection{Algoritmos genéticos generalistas}  
+Para realizar esta solución hemos planteado el siguiente esquema. 
+
+\begin{enumerate}
+    \item Inicializamos la primera generación $t=1$ con $M = 30$ cromosomas que son
+    vectores inicializado de manera aleatoria en $\{0\} \cup [0.1; 1]$ de tamaño $d$  donde $d$ es el número de atributos a analizar.  
+    \item  Evaluamos la función objetivo de estos resultados. 
+    \item Procedemos a realizar las sucesivas generaciones hasta que se cumpla el criterio de parada. 
+\end{enumerate}
+
+La generación de las sucesivas generaciones consiste en el siguientes algoritmo que tiene de  
+\textbf{Entrada}:
+        \begin{itemize}
+          \item \texttt{EMFE}: evaluaciones máximas función evaluación.
+          \item $M \in \mathbb{N}$: número de cromosomas en cada generación. 
+          \item $P_c \in [0,1]$: probabilidad de cruce. 
+          \item $P_m \in [0,1]$: probabilidad de mutación. 
+          \item $d$ tamaño de cada cromosoma. 
+          \item $F$ función de evaluación. 
+          \item \textit{Función-cruce}$: C \times C \longrightarrow C \times C$ Algoritmo de cruce. 
+          \item \textit{Función-Mutación}$: C \longrightarrow C $ Función de mutación. 
+        \end{itemize}
+
+y de 
+\textbf{Salida}:Última generación de cromosomas a la que se ha llegado,
+        consiste en un conjunto de tamaño $M$ de pares de cromosomas y su valor en la función de evaluación.
+
+% Algoritmo genético generacional  
+\begin{algorithm}[H]
+    \caption{Algoritmo genético generacional}
+
+    \begin{algorithmic}[1]
+        \State Generamos primera generación \\
+        \begin{align*}
+            \textit{Generación }\gets & \text{ conjunto de tamaño $M$ tal que } \\
+            \{ \quad  & \\
+                &(v, f(v)) | v \gets \text{vector  aleatorio con valores en } [0,1] \\ 
+                & \text{ donde si  los valores menores que } 0.1 \text{ se transforman a } 0. \\
+            \}. \quad &
+        \end{align*}
+        % Cálculos auxiliares 
+        \State Cálculo de valores auxiliares.
+        \begin{itemize}
+            \item \textit{numero de cruces}  $\gets round\left(P_c \frac{M}{2}\right).$
+            \item \textit{parejas a cruzar} $\gets$ vector de tamaño del \textit{numero de cruces} con valores aleatorios y únicos de enteros entre $1$ y $\frac{M}{2}$.
+            \item \textit{índices cruce } $\gets \{ (2 i-2, 2 i -1 ) | i \in \textit{ parejas a cruzar } \}$. 
+            \item \textit{cantidad de cromosomas a mutar }  $\gets round(P_m M)$.
+            \item \textit{ índices a mutar } $\gets$ vector de índices con valores entre 1 y $M$ de tamaño \textit{ la cantidad cromosomas a mutar}. 
+        \end{itemize}
+
+        \textit{evaluaciones} $\gets M$.
+        % Procedemos a evolucionar 
+        \While{$evaluaciones < EMFE$}
+            % Selección
+            \State \textbf{Paso 1: Selección}
+            \State \textit{Seleccionados} $\gets$ conjunto formado tras $M$ enfrentamientos binarios binarios de \textit{Generación }. 
+            % Cruce 
+            \State \textbf{Paso 2: Cruce }
+            \For{ $(i,j) \in$\textit{índices cruce }  }
+            \begin{align*}
+                & h_1, h_2 \gets \textit{Función- cruce}(Seleccionados[i], Seleccionados[j]) \\
+                & Seleccionados[i] \gets h_1 \\
+                & Seleccionados[j] \gets h_2 
+            \end{align*}
+            \EndFor
+
+            % Mutación 
+            \State \textbf{Paso 3:  Mutación}
+            \For{ $i \in$ \textit{ índices a mutar }  }
+            \begin{align*}
+                Seleccionados[i] \gets \textit{Función-mutación}(Seleccionados[i]).
+            \end{align*}
+            \EndFor
+        \EndWhile
+        % Reemplazo 
+        \State \textbf{Paso 4:  Reemplazo}
+        \Comment{Toda la generación es reemplazada}
+        \begin{equation*}
+            \textit{Generación } \gets 
+            \{
+                (s, F(s)) | s \in  Seleccionados
+            \}.
+        \end{equation*}
+        % Actualizamos valores
+        \State $evaluaciones \gets evaluaciones + M$ \Comment{Número evaluaciones totales función evaluación }
+
+        % Para cada uno de los vectores          
+       \State \textbf{return} \textit{Generación }.
+    \end{algorithmic}
+  \end{algorithm}
+
+TODO: 
+  Notemos que falta por explicar el algoritmo de torneo binario 
+  y como función de mutación se mutación se ha usado la de general vecinos de la práctica anterior TODO:  añadir referencia. 
