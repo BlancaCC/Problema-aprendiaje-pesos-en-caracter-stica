@@ -1,7 +1,7 @@
 using Test 
 #include("../algoritmos-busqueda/generar-vecino.jl")
 #include("../algoritmos-busqueda/busqueda-local.jl")
-include("../learner/BL-euclidean-1-NN.jl")
+include("../../learner/BL-euclidean-1-NN.jl")
 
 @testset "Buscar vecino cambiando todo " begin 
     w = [0.5, 0.5, 0.5]

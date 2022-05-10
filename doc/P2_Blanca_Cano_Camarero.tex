@@ -1,4 +1,4 @@
-\documentclass[11pt,twoside,titlepage,a4paper]{article}
+\documentclass[11pt,twoside,titlepage,a4paper]{book}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PAQUETES
@@ -103,7 +103,7 @@
 % REFERENCIAS
 
 \hypersetup{
-	pdftitle={	Implementación de las técnicas de mezcla de regiones usando la ecuación de Poisson}, % Título del pdf
+	pdftitle={	Memoria metaheurística}, % Título del pdf
 	pdfauthor={}, % Autor del pdf
     colorlinks=true, % Referencias con color
     linkcolor=black, % Color de las referencias internas
@@ -233,10 +233,7 @@
 	\color{fg_por}{
 	%\title{Implementación de la técnica de mezclado de colores usando la ecuación del Poisson}
 		\fontsize{50pt}{50pt}{\scshape{
-		Técnica de Búsqueda Local\\ 
-        y \\
-        Algoritmos Greedy\\
-        para el Problema del Aprendizaje \\
+		Metaheurísticas para el problema del Aprendizaje \\
         de Pesos 
         en Características.}} % Título
 	}
@@ -267,12 +264,23 @@
 
 %% Añadir aquí las respectivas entradas 
 \input{secciones/0_problema}
-\input{secciones/1_preprocesado}
-\input{secciones/2_k-nn}
-\input{secciones/3_busqueda_local}
-\input{secciones/4_greedy}
-\include{secciones/5_conclusiones}
-\include{secciones/6_estructura}
+\chapter{Práctica 1: Técnicas de Búsqueda Local 
+y 
+Algoritmos Greedy}
+\input{secciones/P1/1_preprocesado}
+\input{secciones/P1/2_k-nn}
+\input{secciones/P1/3_busqueda_local}
+\input{secciones/P1/4_greedy}
+\include{secciones/P1/5_conclusiones}
+\include{secciones/P1/6_estructura}
+% Práctica 2: 
+\chapter{Práctica 2: Técnicas de Búsqueda basadas en Poblaciones}
+% Esquema de las soluciones empleadas
 
+% Descripción en pseudocódigo de la función objetivo 
 
+% Pseudo código del proceso de generación de soluciones aleatorias
+
+% Pseudocódigo de los AGs y los operadores de cruce y mutación.
+\input{secciones/P2/Operadores_cruce} 
 \end{document}

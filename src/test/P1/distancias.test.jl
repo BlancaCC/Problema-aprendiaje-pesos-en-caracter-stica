@@ -1,5 +1,5 @@
 using Test 
-include("../utils/distancias.jl")
+include("../../utils/distancias.jl")
 
 
 @testset "Distancias" begin 

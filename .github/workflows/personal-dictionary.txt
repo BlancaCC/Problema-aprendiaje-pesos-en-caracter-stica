@@ -11,6 +11,7 @@ Fatih
 GeneraVecino
 ISSN
 Kurugollu
+Metaheurísticas
 NN
 Nótese
 OneNN
@@ -69,6 +70,7 @@ leftline
 li
 linkcolor
 maximo
+metaheurística
 minimo
 multispectral
 numbersep
@@ -97,3 +99,4 @@ utils
 vectorDeCeros
 xleftmargin
 ésimo
+BLX

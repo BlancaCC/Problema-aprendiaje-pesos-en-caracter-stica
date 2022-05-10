@@ -5,7 +5,7 @@ result_p1: #install-julia-packages
 	julia --project=. --threads 2  src/resultados/Greedy.jl
 	julia --project=. --threads 2 src/resultados/Busqueda-Local.jl 
 compile:
-	cd doc/ && latexmk -shell-escape -pdf memoria_1.tex
+	cd doc/ && latexmk -shell-escape -pdf P2_Blanca_Cano_Camarero.tex
 
 clean:
 	find . -name "*.aux" -type f -delete
@@ -29,16 +29,20 @@ workflow-spell: install-spell spell
 install-julia-packages:
 	julia --project=. scripts/julia_pkg_instalations.jl
 	
-test-library:
-	julia --project=. src/test/OneNN.test.jl  
-	julia --project=. src/test/distancias.test.jl
-	julia --project=. src/test/datos.test.jl
-	julia --project=. src/test/generar-vecinos.test.jl
-	julia --project=. src/test/funcion-objetivo.test.jl
-	julia --project=. --threads 3 src/test/VerboseValidation.test.jl
-	julia --project=. src/test/Relief.test.jl
+test-library-P1:
+	julia --project=. src/test/P1/OneNN.test.jl  
+	julia --project=. src/test/P1/distancias.test.jl
+	julia --project=. src/test/P1/datos.test.jl
+	julia --project=. src/test/P1/generar-vecinos.test.jl
+	julia --project=. src/test/P1/funcion-objetivo.test.jl
+	julia --project=. --threads 3 src/test/P1/VerboseValidation.test.jl
+	julia --project=. src/test/P1/Relief.test.jl
 
-test-library-workflow: test-library
+# Test de la biblioteca P-2
+t:
+	julia --project=. src/test/P2/operadores_cruce.test.jl
+
+test-library-workflow: test-library-P1
 
 
 ## test en general 

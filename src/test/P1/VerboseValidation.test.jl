@@ -1,5 +1,5 @@
-include("../naive-classifiers/constant.jl")
-include("../utils/validation.jl")
+include("../../naive-classifiers/constant.jl")
+include("../../utils/validation.jl")
 
 data = [-1 0; 1 1; -1 -3; 1 -2; 9 -1; 1 2; 10 20]
 class = ['-', '+',  '-',   '-',  '-', '+' , '+' ]

@@ -26,7 +26,6 @@ process_name = [
 ]
 Random.seed!(0)
 for i in 1:length(files)
-    # Seleccionamos parkinson
     file = files[i]
     data , labels = DataLabelArff(file.route, file.class_atributte)
     ## Entrenar para obtener el peso 
