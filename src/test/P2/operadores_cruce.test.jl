@@ -3,7 +3,7 @@
 #   BLX
 ####################################
 using  Test
-include("../../operadores_cruce/BLX.jl")
+include("../../algoritmos-geneticos/operadores_cruce/BLX.jl")
 
 @testset "BLX " begin
     n = 10
