@@ -21,7 +21,8 @@ l3_test = [CalculateIndex(4,9,i) for i in 1:4 ]
 CalculateIndex(fold::Integer, len::Integer, index::Integer)=index*floor(Int, len/fold)+((mod(len,fold) >= (index)) ? index : mod(len,fold))
 
 """
-    VerboseCrossValidation(data, labels, folds_number, algorithm)
+    VerboseCrossValidation(data, labels, folds_number, learner_algorithm, file_name::String, 
+    umbral_tasa_reduccion=0.1, a = 0.5)
 Divide el conjunto de datos en `folds_number` particiones disjuntas.
 Repite `folds_number` veces: 
 entrena con `folds_number-1` conjuntos y valida con el restante. 

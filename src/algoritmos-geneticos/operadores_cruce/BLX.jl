@@ -8,8 +8,9 @@ using Random
     BLX(C1, C2, 𝛂)
 Operador de cruce BLX, dados dos cromosomas 
 devuele dos descencientes. 
+Si C1 == C2 entoneces el cruce es la identidad 
 """
-function BLX(C1, C2, alpha)
+function BLX(C1, C2, alpha=0.3)
     l = length(C1)
     H = Array{Float64, 2}(undef, 2, l)
     for j in 1:l

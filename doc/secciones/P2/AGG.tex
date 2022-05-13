@@ -77,19 +77,19 @@ y de
                 Seleccionados[i] \gets \textit{Función-mutación}(Seleccionados[i]).
             \end{align*}
             \EndFor
+        
+            % Reemplazo 
+            \State \textbf{Paso 4:  Reemplazo}
+            \Comment{Toda la generación es reemplazada}
+            \begin{equation*}
+                \textit{Generación } \gets 
+                \{
+                    (s, F(s)) | s \in  Seleccionados
+                \}.
+            \end{equation*}
+            % Actualizamos valores
+            \State $evaluaciones \gets evaluaciones + M$ \Comment{Número evaluaciones totales función evaluación }
         \EndWhile
-        % Reemplazo 
-        \State \textbf{Paso 4:  Reemplazo}
-        \Comment{Toda la generación es reemplazada}
-        \begin{equation*}
-            \textit{Generación } \gets 
-            \{
-                (s, F(s)) | s \in  Seleccionados
-            \}.
-        \end{equation*}
-        % Actualizamos valores
-        \State $evaluaciones \gets evaluaciones + M$ \Comment{Número evaluaciones totales función evaluación }
-
         % Para cada uno de los vectores          
        \State \textbf{return} \textit{Generación }.
     \end{algorithmic}
