@@ -2,10 +2,10 @@
 using Random
 
 ## Leer datos 
-include("../utils/preprocesado_datos.jl")
-include("../utils/validation.jl")
-include("../utils/funcion-objetivo.jl")
-include("../learner/RELIEF.jl")
+include("../../utils/preprocesado_datos.jl")
+include("../../utils/validation.jl")
+include("../../utils/funcion-objetivo.jl")
+include("../../learner/RELIEF.jl")
 
 file_path= "src/Instancias_APC/"
 struct DataFile

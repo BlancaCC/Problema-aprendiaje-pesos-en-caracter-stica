@@ -1,9 +1,9 @@
 using Random
 
 ## Leer datos 
-include("../utils/preprocesado_datos.jl")
-include("../utils/validation.jl")
-include("../learner/euclidean-1-NN.jl")
+include("../../utils/preprocesado_datos.jl")
+include("../../utils/validation.jl")
+include("../../learner/euclidean-1-NN.jl")
 
 file_path= "src/Instancias_APC/"
 struct DataFile

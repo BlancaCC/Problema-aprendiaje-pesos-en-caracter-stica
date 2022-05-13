@@ -1,9 +1,9 @@
 all: compile
 
-result_p1: #install-julia-packages
-	julia --project=. src/resultados/1NN.jl 
-	julia --project=. --threads 2  src/resultados/Greedy.jl
-	julia --project=. --threads 2 src/resultados/Busqueda-Local.jl 
+result_p1: 
+	julia --project=. src/resultados/1NN/1NN.jl 
+	julia --project=. --threads 2  src/resultados/Greedy/Greedy.jl
+	julia --project=. --threads 2 src/resultados/BL/Busqueda-Local.jl 
 compile:
 	cd doc/ && latexmk -shell-escape -pdf P2_Blanca_Cano_Camarero.tex
 
