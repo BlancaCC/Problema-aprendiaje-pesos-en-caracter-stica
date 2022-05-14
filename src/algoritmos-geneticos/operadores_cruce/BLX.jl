@@ -18,9 +18,10 @@ function BLX(C1, C2, alpha=0.3)
         c_min = minimum([C1[j], C2[j]])
         I = c_max - c_min
         # auxiliales
-        longitud_intervalo = 3* I* alpha 
+        longitud_intervalo = I + 2*I* alpha 
         for i in 1:2
-            H[i,j] = rand()*longitud_intervalo + c_min-I*alpha
+            H[i,j] = longitud_intervalo + (c_min-I*alpha)
+            #min(1.0,max(0,rand()*longitud_intervalo - (c_min-I*alpha)))
         end
     end
     return H[1,:], H[2,:]

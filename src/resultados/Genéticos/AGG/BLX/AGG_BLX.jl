@@ -31,24 +31,24 @@ process_name = [
     DataFile(csv_file_path*iniciales_nombre*"parkinsons.result.csv", "Datos parkinson "),
     DataFile(csv_file_path*iniciales_nombre*"spectf-heart.result.csv", "Datos ataques corazón")
 ]
-i = 1
-Random.seed!(0)
-file = files[i] # Parkinson
-data , labels = DataLabelArff(file.route, file.class_atributte)
+for i in 1:length(files)
+    Random.seed!(0)
+    file = files[i] # Parkinson
+    data , labels = DataLabelArff(file.route, file.class_atributte)
 
-f_mutación(x) = GenNeighbourhood(x, 0, 0.3) # Coincide con el BL de la práctica P1
+    f_mutación(x) = GenNeighbourhood(x, 0, 0.3) # Coincide con el BL de la práctica P1
 
-# Devolvemos la función que aprende de los datos 
-AGG_BLX_LearnerOneNN(data, labels)= AGG_LearnerOneNN(
-    data, labels,
-     40, #evaluaciones_máximas_FE 
-     30, # numero_cromosomas_por_generación 
-    0.7, # probabilidad_cruce 
-    0.1, # probabilidad_mutación 
-    size(data)[2], # tamaño_cromosoma = número atributos
-    BLX, # función_cruce 
-    f_mutación # función_mutación 
-)
+    # Devolvemos la función que aprende de los datos 
+    AGG_BLX_LearnerOneNN(data, labels)= AGG_LearnerOneNN(
+        data, labels,
+        15000, #evaluaciones_máximas_FE 
+        30, # numero_cromosomas_por_generación 
+        0.7, # probabilidad_cruce 
+        0.1, # probabilidad_mutación 
+        size(data)[2], # tamaño_cromosoma = número atributos
+        BLX, # función_cruce 
+        f_mutación # función_mutación 
+    )
 
-VerboseCrossValidation(data, labels, 5, AGG_BLX_LearnerOneNN, process_name[i].route)
-
+     VerboseCrossValidation(data, labels, 5, AGG_BLX_LearnerOneNN, process_name[i].route)
+end

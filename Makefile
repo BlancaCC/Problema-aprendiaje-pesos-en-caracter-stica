@@ -1,5 +1,8 @@
 all: compile
 
+result_p2:
+	julia --project=. /src/resultados/Genéticos/AGG/BLX/AGG_BLX.jl
+
 result_p1: 
 	julia --project=. src/resultados/1NN/1NN.jl 
 	julia --project=. --threads 2  src/resultados/Greedy/Greedy.jl
