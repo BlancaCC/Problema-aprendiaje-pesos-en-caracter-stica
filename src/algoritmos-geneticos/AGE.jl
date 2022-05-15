@@ -61,7 +61,6 @@ function AGE(   evaluaciones_máximas_FE,
                 función_cruce
         )  
         # Paso 3: Mutación 
-        println("tipo $(typeof(Seleccionados))Seleccionados $(Seleccionados)")
         for i in 1:2
             if(rand()< probabilidad_mutación)
                 Seleccionados[i] = función_mutación(Seleccionados[i])
