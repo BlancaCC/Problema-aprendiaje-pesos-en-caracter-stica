@@ -23,5 +23,5 @@ function BLX(C1, C2, alpha=0.3)
             H[i,j] = min(1.0,max(0,rand()*longitud_intervalo + (c_min-I*alpha)))
         end
     end
-    return H[1,:], H[2,:]
+    return [H[1,:], H[2,:]]
 end
