@@ -20,8 +20,7 @@ function BLX(C1, C2, alpha=0.3)
         # auxiliales
         longitud_intervalo = I + 2*I* alpha 
         for i in 1:2
-            H[i,j] = longitud_intervalo + (c_min-I*alpha)
-            #min(1.0,max(0,rand()*longitud_intervalo - (c_min-I*alpha)))
+            H[i,j] = min(1.0,max(0,rand()*longitud_intervalo + (c_min-I*alpha)))
         end
     end
     return H[1,:], H[2,:]

@@ -93,9 +93,19 @@ function AGG(   evaluaciones_máximas_FE,
             Seleccionados[i] = función_mutación(Seleccionados[i])
         end
         # Paso 4: Reemplazo 
-        generación = Seleccionados # Por tratarse de algoritmo generalista se reemplaza totalmente la población
+        # Calculamos mejor cromosoma generación anterior
+        índice_mejor = argmax(evaluaciones_función_evaluación)
+        mejor_cromosa = generación[índice_mejor]
+        
+        generación = Seleccionados # Por tratarse de algoritmo generalista se reemplaza totalmente la población        
+        # para mantener el elitismo si no está el mejro de la generación lo añadimos
+        if !(mejor_cromosa in generación)
+            índice_peor = argmin(evaluaciones_función_evaluación)
+            generación[índice_peor] = mejor_cromosa
+        end
+        
         evaluaciones_función_evaluación = map(x -> función_evaluación(x), generación)
-        evaluaciones += numero_cromosomas_por_generación
+        evaluaciones += numero_cromosomas_por_generación 
     end
 
     # Devolvemos el mejor cromosoma encontrado
