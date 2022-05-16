@@ -18,7 +18,7 @@ de evaluación `Fun_eval`
 """
 function PrimeroMejor(w, 
     evaluaciones_maximas_funcion_objetivo::Int,
-    Fun_eval)::Vector{<:Real}
+    Fun_eval)
     evaluaciones = 0
     Fun_eval_w = Fun_eval(w)
     indice::Int = 1 
@@ -34,5 +34,5 @@ function PrimeroMejor(w,
    
         evaluaciones += 1
     end
-    return w
+    return w, Fun_eval_w
 end

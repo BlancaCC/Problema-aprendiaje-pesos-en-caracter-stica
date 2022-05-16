@@ -5,7 +5,7 @@ using Random
 
 
 """
-    BLX(C1, C2)
+    MediaPonderada((C1, C2)
 Operador de cruce por ponderación 
 Genera dos hijos 
 """

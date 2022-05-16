@@ -137,7 +137,6 @@ function AGG_LearnerOneNN(data::Matrix{<:Real},labels,
         función_evaluación, 
         función_cruce,
         función_mutación)
-    println("El peso obtenido es w = $(w)")
     return WeightedLearnerEuclideanOneNN(w, data, labels), f_w, w
 
 end
