@@ -8,7 +8,7 @@ result_p2_geneticos:
 
 result_p2_memeticos:
 	julia --project=. --threads 2 src/resultados/Meméticos/AM-10-1/AM-10-1.jl
-	julia --project=. --threads 2 src/resultados/Meméticos/AM-10-1/AM-10-01.jl
+	julia --project=. --threads 2 src/resultados/Meméticos/AM-10-01/AM-10-01.jl
 
 result_p1: 
 	julia --project=. src/resultados/1NN/1NN.jl 
