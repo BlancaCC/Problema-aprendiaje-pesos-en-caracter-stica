@@ -1,4 +1,6 @@
 personal_ws-1.1 es 0 utf-8 
+AGG
+Agr
 Atif
 BLX
 Bouridane
@@ -12,6 +14,7 @@ FFFFFF
 Fatih
 GeneraVecino
 ISSN
+Iosnosphere
 Kurugollu
 Metaheurísticas
 NN
@@ -34,6 +37,7 @@ bibliografia
 biomedicine
 breaklines
 citecolor
+clas
 colorlinks
 commentstyle
 computarizada
