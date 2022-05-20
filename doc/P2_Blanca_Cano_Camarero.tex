@@ -254,11 +254,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ÍNDICE
 
-\newpage
+\let\LaTeXStandardClearpage\clearpage
+\let\clearpage\relax  % Do nothing when a \clearpage command appears 
 \tableofcontents
+\listoftables
+\listofalgorithms
+\let\clearpage\LaTeXStandardClearpage % Return to the old definition
 \newpage
-\listoffigures
-\clearpage
+%\tableofcontents
+%\newpage
+%\listoffigures
+%\listoftables
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
