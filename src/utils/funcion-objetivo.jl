@@ -21,7 +21,7 @@ function CrearFuncionObjetivo(datos, etiquetas, a::Real, umbral_tasa_reduccion::
         
         # Calculamos tasa de reducción valor entre [0,100]
         tasa_reducion = 100*sum(
-            map(x-> (x < umbral_tasa_reduccion) ? 0 : 1, w)
+            map(x-> (x < umbral_tasa_reduccion) ? 1 : 0, w)
             )/length(w)
         # Evaluación combinación de ambas
         return a*accuracy + (1-a)*tasa_reducion

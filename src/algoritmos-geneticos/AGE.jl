@@ -1,5 +1,5 @@
 ##################################
-# ALGORITMO GENÉTICO GENERALISTA 
+# ALGORITMO GENÉTICO generacional 
 ##################################
 using Random
 

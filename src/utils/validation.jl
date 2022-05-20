@@ -80,8 +80,8 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
         evaluacion = a*accuracy + (1-a)*tasa_reducion
 
         # Guardamos datos que se escribirán en el fichero 
-       
-        dfTime[i] = time*1000
+       #            s -> x1000 ms
+        dfTime[i] = time#*1000
         dfAgregacion[i] = evaluacion
         dfClasificacion[i] = accuracy
         dfReduccion[i] = tasa_reducion
@@ -90,8 +90,8 @@ function VerboseCrossValidation(data, labels, folds_number, learner_algorithm, f
         # habría que hacer esto con un cerrojo
             println("------------------------------------")
             println("Termina iteración $i/$folds_number de CV para $file_name con: 
-            Tiempo (ms): $(dfTime[i])  tasa clasificación: $accuracy  tasa reducción: $tasa_reducion agregación: $evaluacion 
-            w = $w")
+            Tiempo (s): $(dfTime[i])  tasa clasificación: $accuracy  tasa reducción: $tasa_reducion agregación: $evaluacion 
+            w = $w\n")
             println("------------------------------------")
         unlock(lk)
  

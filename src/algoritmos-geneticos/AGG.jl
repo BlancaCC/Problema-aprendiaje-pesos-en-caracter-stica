@@ -67,11 +67,15 @@ function AGG(   evaluaciones_máximas_FE,
     # Variable que acumula el número de evaluaciones de la función de evaluación 
     evaluaciones = numero_cromosomas_por_generación
     # Array que contendrá a los elementos seleccionados
-    Seleccionados = generación
+    Seleccionados = copy(generación)
+    t = 1 # generación
+
     while evaluaciones < evaluaciones_máximas_FE
-        
+        #println("$(t): Evaluaciones maximo $(maximum(evaluaciones_función_evaluación))\n$(evaluaciones_función_evaluación)")
+        t+=1
         # Paso 1: Selección (torneo binario)
         índices_seleccionados = TorneoBinario(evaluaciones_función_evaluación, numero_cromosomas_por_generación)
+        #println("índices seleccionados $(sort(índices_seleccionados)) \n")
 
         # Paso 2: Cruce 
         Seleccionados = [
@@ -96,15 +100,19 @@ function AGG(   evaluaciones_máximas_FE,
         # Calculamos mejor cromosoma generación anterior
         índice_mejor = argmax(evaluaciones_función_evaluación)
         mejor_cromosa = generación[índice_mejor]
-        
-        generación = Seleccionados # Por tratarse de algoritmo generalista se reemplaza totalmente la población        
-        # para mantener el elitismo si no está el mejro de la generación lo añadimos
+        evaluación_mejor_cromosoma = evaluaciones_función_evaluación[índice_mejor]
+        # Reemplezamos generación
+        generación = copy(Seleccionados) # Por tratarse de algoritmo generacional se reemplaza totalmente la población 
+        evaluaciones_función_evaluación = map(x -> función_evaluación(x), generación)
+
+        # para mantener el elitismo si no está el mejor de la generación lo añadimos
         if !(mejor_cromosa in generación)
             índice_peor = argmin(evaluaciones_función_evaluación)
             generación[índice_peor] = mejor_cromosa
+            evaluaciones_función_evaluación[índice_peor] = evaluación_mejor_cromosoma
         end
         
-        evaluaciones_función_evaluación = map(x -> función_evaluación(x), generación)
+        
         evaluaciones += numero_cromosomas_por_generación 
     end
 

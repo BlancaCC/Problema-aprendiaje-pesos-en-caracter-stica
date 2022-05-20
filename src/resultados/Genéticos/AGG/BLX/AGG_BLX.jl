@@ -3,7 +3,7 @@
 ############################
 
 using Random
-## Leectura de datos
+## Leectura de datos 
 include("../../../../utils/preprocesado_datos.jl")
 include("../../../../utils/validation.jl")
 ## Algoritmo de aprendizaje que se va a usar 
