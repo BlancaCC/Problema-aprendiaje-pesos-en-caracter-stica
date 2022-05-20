@@ -1,5 +1,5 @@
 ############################
-## Extrae los resultados concernientes al algoritmo AGE_BLX para los tres data set concerniente
+## Extrae los resultados concernientes al algoritmo Memético BLX para los tres data set concerniente
 ############################
 
 using Random
@@ -28,8 +28,8 @@ files = [
 ]
 # Directorio donde se guardará el fichero
 
-csv_file_path  = "src/resultados/Meméticos/AM-10-01/"
-iniciales_nombre = "AM-(10,0.1)-"
+csv_file_path  = "src/resultados/Meméticos/AM-10-01-mej/"
+iniciales_nombre = "AM-(10,0.1mej)-"
 process_name = [
     DataFile(csv_file_path*iniciales_nombre*"ionosphere.result.csv", "Datos Iosfera"),
     DataFile(csv_file_path*iniciales_nombre*"parkinsons.result.csv", "Datos parkinson "),
@@ -40,7 +40,7 @@ process_name = [
 if length(ARGS) == 1 && parse(Int,ARGS[1]) in [1,2,3]
     n = parse( Int, ARGS[1] )
     inicio = n
-    final = n   
+    final = n
 else
     inicio = 1
     final = length(files)
@@ -64,7 +64,7 @@ for i in inicio:final
         BLX, # función_cruce 
         f_mutación, # función_mutación
         0.1,#porcentaje_cromosomas_busqueda_local,
-        IndiceCromosomasProbabilidad,#funcion_selección_índices_para_busqueda_local, 
+        MejoresCromosomas,#funcion_selección_índices_para_busqueda_local, 
         10 #numero_generaciones_aplicar_bl = 10,
     )
      VerboseCrossValidation(data, labels, 5, AM_LearnerOneNN, process_name[i].route)
