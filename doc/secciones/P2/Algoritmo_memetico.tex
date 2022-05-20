@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Consideraciones sobre el algoritmo memético  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Algoritmo memético}  
+
+Para el algoritmo genético generacional el mejor operador de cruce obtenido ha sido el \textit{BLX}, así que será el que utilicemos para este caso. 
+
+\subsection{Descripción de la implementación}  
+
+La idea que subyace es sencilla, se ha tomado como base la estructura del algoritmo genético generacional,
+ y cuando se encuentra ante cierta generación dado un subconjunto 
+ de cromosomas, estos se sustituyen por el resultado de hacer 
+ búsqueda local sobre él. 
+
+El criterio seleccionado para aplicar búsqueda local ha sido cada diez generaciones.
+
+Así pues el pseudo código del algoritmo memético, sin profundizar  en los pasos 1 a 4 porque son idénticos a los algoritmos genéticos y ya explicada de los algoritmos genéticos sería: 
+
+\begin{algorithm}[H]
+    \caption{Algoritmo memético}
+    \begin{algorithmic}[1]
+        \State Se general la primera generación. 
+        \State La construcción de las distintas generaciones viene dada por: 
+        \While{$evaluaciones < EMFE$}
+        \State \textbf{Paso 1: Selección}
+        \State \textbf{Paso 2: Cruce }
+        \State \textbf{Paso 3:  Mutación}
+        \State \textbf{Paso 4:  Reemplazo}
+        \State \textit{numero generación} $\gets$ \textit{numero generación} $+1$
+        \State \textbf{Paso 5: Aplicar BL si se dan las condiciones} \\
+        \Comment{Se cominza a describir el paso 5}
+        \If{\textit{num generaciones aplicar BL}    $\cong \mod $ \textit{numero generación}  }
+            \State Hola esto está dentro del if
+        \EndIf 
+        \EndWhile
+        
+    \end{algorithmic}
+    
+\end{algorithm}
+
+Notemos que de introducir el otro antes se estaría introduciendo 
+ruido

@@ -81,6 +81,18 @@ function Memetico(   evaluaciones_máximas_FE,
     Seleccionados = generación
     numero_generacion = 1
     while evaluaciones < evaluaciones_máximas_FE
+        # Paso 0: se comprueba si hay que aplicar la búsqueda local 
+        if(numero_generacion % numero_generaciones_aplicar_bl == 0)
+            for i in funcion_selección_índices_para_busqueda_local(numero_cromosomas_por_generación, 
+                porcentaje_cromosomas_busqueda_local,
+                evaluaciones_función_evaluación)
+                generación[i], evaluaciones_función_evaluación[i] = PrimeroMejor(generación[i],
+                                2*tamaño_cromosoma,
+                                función_evaluación)
+                evaluaciones += 2*tamaño_cromosoma
+            end
+        end 
+        
         # Paso 1: Selección (torneo binario)
         índices_seleccionados = TorneoBinario(evaluaciones_función_evaluación, numero_cromosomas_por_generación)
 
@@ -120,19 +132,8 @@ function Memetico(   evaluaciones_máximas_FE,
             generación[índice_peor] = mejor_cromosa
             evaluaciones_función_evaluación[índice_peor] = evaluación_mejor_cromosoma
         end
-        numero_generacion += 1
         
-        # Paso 5: se comprueba si hay que aplicar la búsqueda local 
-        if(numero_generacion % numero_generaciones_aplicar_bl == 0)
-            for i in funcion_selección_índices_para_busqueda_local(numero_cromosomas_por_generación, 
-                porcentaje_cromosomas_busqueda_local,
-                evaluaciones_función_evaluación)
-                generación[i], evaluaciones_función_evaluación[i] = PrimeroMejor(generación[i],
-                                2*tamaño_cromosoma,
-                                función_evaluación)
-                evaluaciones += 2*tamaño_cromosoma
-            end
-        end 
+        numero_generacion += 1
     end
 
     # Devolvemos el mejor cromosoma encontrado

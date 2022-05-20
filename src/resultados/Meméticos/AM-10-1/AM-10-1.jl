@@ -9,7 +9,7 @@ include("../../../utils/validation.jl")
 ## Algoritmo de aprendizaje que se va a usar 
 include("../../../algoritmo-memetico/memetico.jl")
 # Operador de cruce
-include("../../../algoritmos-geneticos/operadores_cruce/Media.jl")
+include("../../../algoritmos-geneticos/operadores_cruce/BLX.jl")
 # Operador de mutación es el de generar vecino de búsqueda local 
 include("../../../algoritmos-busqueda/generar-vecino.jl")
 # Algoritmo de selección de índices  a los que aplicar búsqueda local 
@@ -28,7 +28,7 @@ files = [
 ]
 # Directorio donde se guardará el fichero
 
-csv_file_path  = "src/resultados/Meméticos/AM-10-1"
+csv_file_path  = "src/resultados/Meméticos/AM-10-1/"
 iniciales_nombre = "AM-(10,1)-"
 process_name = [
     DataFile(csv_file_path*iniciales_nombre*"ionosphere.result.csv", "Datos Iosfera"),
@@ -61,7 +61,7 @@ for i in inicio:final
         0.7, #probabilidad_cruce 
         0.1, # probabilidad_mutación 
         size(data)[2], # tamaño_cromosoma = número atributos
-        MediaPonderada, # función_cruce 
+        BLX, # función_cruce 
         f_mutación, # función_mutación
         1.0,#porcentaje_cromosomas_busqueda_local,
         IndiceCromosomasProbabilidad,#funcion_selección_índices_para_busqueda_local, 

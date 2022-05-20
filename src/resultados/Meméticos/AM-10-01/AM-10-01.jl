@@ -28,7 +28,7 @@ files = [
 ]
 # Directorio donde se guardará el fichero
 
-csv_file_path  = "src/resultados/Meméticos/AM-10-01"
+csv_file_path  = "src/resultados/Meméticos/AM-10-01/"
 iniciales_nombre = "AM-(10,0.1)-"
 process_name = [
     DataFile(csv_file_path*iniciales_nombre*"ionosphere.result.csv", "Datos Iosfera"),
