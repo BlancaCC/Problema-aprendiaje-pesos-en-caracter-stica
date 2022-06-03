@@ -1,0 +1,104 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%           Resultados finales de la P2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Compendio de resultados obtenidos}
+
+
+\begin{table}[H]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c| }
+     \hline
+     & \multicolumn{4}{|c|}{\textit{Ionosphere}} 
+     & \multicolumn{4}{|c|}{\textit{Parkinsons}} 
+     &\multicolumn{4}{|c|}{\textit{Spectf-heart}}\\
+     \hline
+       Algoritmo
+       & $\%\_$clas & $\%\_$red & Agr. & T (s) 
+       & $\%\_$clas & $\%\_$red & Agr. & T (s)  
+       & $\%\_$clas & $\%\_$red & Agr. & T (s) 
+       \\ \hline
+    % Algoritmo práctica primera 
+    1NN base
+    & 86.044 &0 & 43.022 & 4.623 $\times 10^-3$
+    & 95.897& 0 & 47.948   &2.312$\times 10^-3$ 
+    & 82.522 & 0 & 41.261   & 4.109$\times 10^-3$ 
+    \\ \hline
+
+    Búsqueda local
+    & 85.191 & 27.059 & 56.125  &  154.672  
+    & 92.821 &  27.059  & 58.228 & 41.035
+    & 82.807 &  20.455 & 51.631 & 357.893
+    \\ \hline
+
+    Greedy
+    & 83.751 & 2.941 & 43.346& 49.051 $\times 10^-3$
+    & 95.385 & 0 & 47.692 &  13.424$\times 10^-3$
+    & 83.959 & 0&41.979 &56.008 $\times 10^-3$
+    \\ \hline
+
+    % Algoritmos genéticos
+    AGG - BLX
+    % class | redu | agre | tiempo 
+    & 87,469 & 63,529& 75,499 & 307,142% Ionosphere
+    & 88,717 & 76,363 & 82,540 & 94,256 %Parkinson
+    & 82,795 & 64,091 & 73,443 & 450,690 % Spectf- heart
+    \\ \hline
+
+    AGG - Media 
+    % class | redu | agre | tiempo 
+    & 85,461 & 55,882 & 70,672 & 264,407 % Ionosphere
+    & 89,744 & 69,091 & 79,417 & 72,522 %Parkinson
+    & 83,383 & 51,818 & 67,601 & 432,108 % Spectf- heart
+    \\ \hline
+
+    AGE - BLX
+    % class | redu | agre | tiempo 
+    & 86,620 & 61,176 & 73,898 & 266,071  % Ionosphere
+    & 88,205 & 71,818 & 80,012 & 91,395  %Parkinson
+    & 82,530 & 50,909 & 66,720 & 295,179 % Spectf- heart
+    \\ \hline
+
+    AGE - Media 
+    % class | redu | agre | tiempo 
+    & 88,040 & 55,882 & 71,961 & 248,215  % Ionosphere
+    & 90,256 & 68,182 & 79,219 & 82,772  %Parkinson
+    & 83,391 & 52,727 & 68,059 & 267,132  % Spectf- heart
+    \\ \hline
+    % Algoritmos meméticos
+    AM-(10,1)
+    % class | redu | agre | tiempo 
+    & 86,330 & 51,765 & 69,047 & 411,971 % Ionosphere
+    & 93,333 & 63,636 & 78,485 & 91,309 %Parkinson
+    & 80,807 & 45,909 & 63,358 & 678,403  % Spectf- heart
+    \\ \hline
+
+    AM-(10,0.1)
+    % class | redu | agre | tiempo 
+    & 86,889 & 55,882 & 71,386 & 290,355 % Ionosphere
+    & 88,718 & 72,727 & 80,723 & 97,608 %Parkinson
+    & 85,673 & 50,909 & 68,291 & 386,280   % Spectf- heart
+    \\ \hline
+
+    AM-(10,0.1 mejores)
+    % class | redu | agre | tiempo 
+    & 88,322 & 58,235 & 73,279 & 253,276 % Ionosphere
+    & 91,795 & 69,091 & 80,443 & 68,432  %Parkinson
+    & 84,526 & 55,909 & 70,217 & 418,921  % Spectf- heart
+    \\ \hline
+
+
+    \end{tabular}
+    }
+    \caption{Comparativas algoritmos capítulo 1 y capítulo 2}
+    \label{Tabla:comparativas-algoritmos-P2}
+\end{table}
+
+Podemos observar que en términos globales el que mejor resultado ofrece es 
+el algoritmo genético generacional con el operador de cruce BLX, sin embargo es además el que mayor tiempo de cálculo emplea. 
+La segunda mejor opción, por el valor de agregación y que presenta una mejora importante a cuanto tiempo sería el memético considerando un subconjunto de mejores.   
+
+Podemos además considerar una mejora sustancial de los resultados al introducir algoritmos genéticos y meméticos, que si bien han duplicado la agregación el tiempo también lo ha hecho, aunque en menor medida y con un crecimiento menor que lineal en relación con la agregación. 
+\subsection{Reflexión sobre la relación entre reducción y clasificación}
+Existe también una tendencia, en todos estos algoritmos  y particiones a que la tasa de clasificación siempre sea mucho mayor que la de reducción. Esto nos está indicado que al aumentar la reducción produce resultados de mayor perjuicio en clasificación, por lo que la agregación bajaría. 

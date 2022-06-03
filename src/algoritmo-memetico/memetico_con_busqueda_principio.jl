@@ -1,5 +1,8 @@
 ##############################################################
-#                   ALGORITMO MEMÉTICO 
+#                   ALGORITMO MEMÉTICO  con búsqueda en PASO 0
+# Este algoritmo es de un experimento propio que se comenta en la 
+# memoria, si está corrigiendo el código y busca el algoritmo memético 
+# propiamente dicho consulte el algoritmo memético de esta misma carpeta
 ##############################################################
 
 using Random

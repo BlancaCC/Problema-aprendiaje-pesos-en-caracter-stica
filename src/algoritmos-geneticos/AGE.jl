@@ -1,5 +1,5 @@
 ##################################
-# ALGORITMO GENÉTICO generacional 
+# ALGORITMO GENÉTICO ESTACIONARIO
 ##################################
 using Random
 
@@ -21,7 +21,6 @@ end
 """
     AGE(   evaluaciones_máximas_FE, 
             numero_cromosomas_por_generación, 
-            probabilidad_cruce,
             probabilidad_mutación, 
             tamaño_cromosoma, 
             función_evaluación, 
@@ -77,8 +76,6 @@ function AGE(   evaluaciones_máximas_FE,
         generación[índice_peor_1] = Seleccionados[1]
         generación[índice_peor_2] = Seleccionados[2]
         # y su valor de evaluación
-        
-        
         evaluaciones_función_evaluación[índice_peor_1] = función_evaluación(generación[índice_peor_1])
         evaluaciones_función_evaluación[índice_peor_2] = función_evaluación(generación[índice_peor_2])
 

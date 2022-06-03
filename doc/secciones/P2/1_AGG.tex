@@ -92,10 +92,99 @@ y de
             \State $evaluaciones \gets evaluaciones + M$ \Comment{Número evaluaciones totales función evaluación }
         \EndWhile
         % Para cada uno de los vectores          
-       \State \textbf{return} \textit{Generación }.
+       \State \textbf{return} mejor cromosoma de la \textit{Generación}.
     \end{algorithmic}
   \end{algorithm}
 
-TODO: 
-  Notemos que falta por explicar el algoritmo de torneo binario 
-  y como función de mutación se mutación se ha usado la de general vecinos de la práctica anterior TODO:  añadir referencia. 
+Para la función de mutación se ha usado el algoritmo de generar vecinos de la práctica primera. 
+
+\subsection{Descripción del torneo binario}  
+
+El algoritmo implementado para el torne binario es sencillo, se toman dos 
+subíndices distintos dentro del tamaño de la población y se comparan sus 
+funciones de evaluación, el que sea mayor resultará el ganador. 
+
+\section{ Algoritmo genético estacionario} 
+
+La idea que subyace es que cada generación solo se cruzará una 
+pareja de cromosomas. Por lo demás, se mantiene la estructura de los algoritmos genéticos. 
+
+El pseudo código es el siguiente. 
+
+\textbf{Entrada}:
+        \begin{itemize}
+          \item \texttt{EMFE}: evaluaciones máximas función evaluación.
+          \item $M \in \mathbb{N}$: número de cromosomas en cada generación. 
+          \item $P_m \in [0,1]$: probabilidad de mutación. 
+          \item $d$ tamaño de cada cromosoma. 
+          \item $F$ función de evaluación. 
+          \item \textit{Función-cruce}$: C \times C \longrightarrow C \times C$ Algoritmo de cruce. 
+          \item \textit{Función-Mutación}$: C \longrightarrow C $ Función de mutación. 
+        \end{itemize}
+
+y de 
+\textbf{Salida}:Última generación de cromosomas a la que se ha llegado,
+        consiste en un conjunto de tamaño $M$ de pares de cromosomas y su valor en la función de evaluación.
+
+% Algoritmo genético generacional  
+\begin{algorithm}[H]
+    \caption{Algoritmo genético estacionario}
+
+    \begin{algorithmic}[1]
+        \State Generamos primera generación \\
+        \begin{align*}
+            \textit{Generación }\gets & \text{ conjunto de tamaño $M$ tal que } \\
+            \{ \quad  & \\
+                &(v, f(v)) | v \gets \text{vector  aleatorio con valores en } [0,1] \\ 
+                & \text{ donde si  los valores menores que } 0.1 \text{ se transforman a } 0. \\
+            \}. \quad &
+        \end{align*}
+     
+        \textit{evaluaciones} $\gets M$.
+        % Procedemos a evolucionar 
+        \While{$evaluaciones < EMFE$}
+            % Selección
+            \State \textbf{Paso 1: Selección por torneo binario }
+            \begin{align*}
+                h_1 & \gets \textit{Generado por torneo binario entre dos} \\
+                h_2 & \gets \textit{Generado por torneo binario entre dos} 
+            \end{align*}
+            % Cruce 
+            \State \textbf{Paso 2: Cruce }
+            \begin{align*}
+                & h_1, h_2 \gets \textit{Función- cruce}(h_1, h_2) \\
+            \end{align*} 
+
+            % Mutación 
+            \State \textbf{Paso 3:  Mutación}
+            \For{ $i \in \{1,2\}$   }
+                \State mutar $h_i$ con probabilidad $P_m$. 
+            \EndFor
+        
+            % Reemplazo 
+            \State \textbf{Paso 4:  Reemplazo}
+            \State Se sustituyen los dos peores por los hijos $h1,h2$.
+            % Actualizamos valores
+            \State $evaluaciones \gets evaluaciones + 2$ \Comment{Número evaluaciones totales función evaluación }
+        \EndWhile
+        % Para cada uno de los vectores          
+       \State \textbf{return} mejor cromosoma de la \textit{Generación }.
+    \end{algorithmic}
+  \end{algorithm}
+
+  \subsection{Observaciones sobre el algoritmo genético estacionario }
+
+  Puede observarse que el coste computacional es menor que con el generacional (aunque mantiene la misma complejidad). 
+
+  La filosofía de ambos es opuesta: en el generacional se sustituye la generación entera y tan solo se conserva el mejor de la anterior. 
+  Mientras que en la estacionaria, se conserva a salvedad de los dos peores la generación anterior. 
+
+  Como ya comentamos en la sección dedicada a los operadores de cruce, el 
+  limitar la capacidad de mutación de manera implícita, genera un árbol de 
+  búsqueda la solución menor, por lo que cabe la posibilidad de que 
+  perdamos en el caminos soluciones mejores. 
+  Podría plantearse por tanto heurísticas que combinen ambos resultados, 
+  es decir, que cada generación cambie por cruce cierto porcentaje de la población; no los casos extremos que tratamos en esta práctica. 
+
+  De hecho esto generaría un compromiso entre eficiencia computacional y bondad del resultado. 
+
