@@ -48,3 +48,45 @@ El pseudo código del operador de cruce creado es
     \end{algorithmic}
   \end{algorithm}
 
+\subsection{ Operador de cruce de media}   
+
+Se pretende generar dos hijos $h_1, h_2$ a partir de dos cromosomas padres $c_1, c_2$, para ello 
+dado un valor real $\alpha \in (0,1)$ aleatorio se generan los dos siguientes hijos: 
+\begin{align*}
+  h_1 &= \alpha c_1 + (1-\alpha ) c_2  \\
+  h_2 &= \alpha c_2 + (1-\alpha ) c_1 
+\end{align*}
+
+Notemos que si $\alpha = 0.5$ entonces los hijos serán iguales. 
+
+\subsection{Reflexión sobre los operadores de cruce}  
+
+Cabría plantearse si existe un operador de cruce mejor que otro, 
+para ello debemos deparar que 
+los coeficientes del algoritmo por media siempre van a estar acotados por los coeficientes de los padres; mientras que para el de $BLX-\alpha$ no, 
+ya que estarán dentro de cierto rango de confianza. 
+
+Esta situación del operador de media genera una restricción implícita en la búsqueda de sucesores, la cual de manera teórica limita la capacidad de exploración de los datos y por ende podría afectar, por lo general a los resultados. 
+
+De hecho a la vista de los resultados empíricos que veremos más adelante
+esta teoría se refuerza.
+
+Para corregir esta situación se podría considerar, dado un $\delta \in \mathbb{R}^+$  que $\alpha \in [-\delta, 1+\delta]$.   
+
+Sin embargo esto mantendría el mismo factor variación para todos los coeficientes. 
+
+Por otro lado el coste computacional de BLX es mayor, ya que para cada gen calcula un aleatorio y una serie de operaciones, el coste depende del tamaño del cromosoma. 
+
+Ante estos dos paradigmas se podría buscar un compromiso entre 
+coste computacional y resultados; realizando combinaciones lineales 
+de subíndices concretos.  Es decir, supongamos que en vez de depender
+del tamaño del cromosoma, se depende del natural $1 <r <<$\textit{tamaño cromosoma}  particiones aleatorias de los 
+índices. 
+
+Entonces podríamos construir a los hijos como:
+Seleccionamos $\alpha_1, \ldots \alpha_r \in [-\delta, 1+\delta]$ aleatorios. 
+
+los coeficientes del hijo $h$ vendrían dados como
+\begin{equation*}
+  h[j] = \alpha_i c_1  + (1-\alpha_i)c_2 \text{ con } j \in \textit{partición de índices}_i.
+\end{equation*}

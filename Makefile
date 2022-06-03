@@ -16,7 +16,7 @@ result_p1:
 	julia --project=. --threads 2  src/resultados/Greedy/Greedy.jl
 	julia --project=. --threads 2 src/resultados/BL/Busqueda-Local.jl 
 compile:
-	cd doc/ && latexmk -shell-escape -pdf P2_Blanca_Cano_Camarero.tex
+	cd doc/ && latexmk -shell-escape -pdf P3_Blanca_Cano_Camarero.tex
 
 clean:
 	find . -name "*.aux" -type f -delete

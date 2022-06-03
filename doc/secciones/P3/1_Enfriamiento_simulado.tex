@@ -1,0 +1,49 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Enfriamiento simulado
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Enfriamiento simulado}
+
+El Enfriamiento es un algoritmo de búsqueda por entornos con un criterio probabilístico de aceptación de soluciones basado en Termodinámica. 
+
+Pretende evitar inconvenientes de la búsqueda local 
+como el que finalice en óptimos locales
+alejados de la solución óptima global. Para ello se 
+va a permitir explorar soluciones subóptimas de una manera
+controlada y cada vez más estricta. 
+
+\subsection{Descripción del algoritmo} 
+
+\subsubsection{Esquema de enfriamiento} 
+La función que determina la probabilidad de tomar una solución peor 
+
+\begin{equation*}
+    T_{k+1} = \frac{T_k}{1 + \beta \cdot T_k}
+\end{equation*}
+con $\beta$ definida como 
+\begin{equation*}
+    \beta = \frac{T_0 - T_f}{M \cdot T_0 \cdot T_f}. 
+\end{equation*}
+
+El valor inicial de la temperatura vendrá dado por 
+\begin{equation*}
+    T_0 = \frac{\mu \cdot C(S_0)}{- \log (\phi)}
+\end{equation*}
+con $C(S_0)$ el coste de la solución inicial,
+$\mu  \in [0,1]$ es la probabilidad de aceptar una solución un $\phi$ peor que la inicial. 
+En esta práctica se ha fijado 
+\begin{equation*}
+    \mu = \phi = 0.3 \text{  y } T_f = 10^{-3}.
+\end{equation*}
+$T_f$ se comprobará previamente que que sea menor que la inicial. 
+
+El resto de parámetros que configuran el algoritmo vienen
+dados como: 
+\begin{itemize}
+    \item \textit{máximo de vecinos}$= 10 n$ con $n$ el tamaño de cada problema. 
+    \item \textit{máximo de éxitos}$= 0.1$\textit{máximo de vecinos}.
+    \item \textit{máximo de evaluaciones}$=1500$.
+    \item \textit{iteraciones enfriamiento}$\frac{15000}{\textit{máximo vecinos}}$ 
+\end{itemize}
+\textcolor{red}{Cambiar esto según convenga}.
+\textbf{Nota: }Se ha seleccionado \textit{máximo de vecinos}$= 10 n$ porque con \textit{máximo de vecinos}$= 10 n$ genera demasiados vecinos por lo general. 

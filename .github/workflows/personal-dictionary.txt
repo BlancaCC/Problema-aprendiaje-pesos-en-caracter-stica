@@ -2,6 +2,7 @@ personal_ws-1.1 es 0 utf-8
 AGG
 Agr
 Atif
+BLK
 BLX
 Bouridane
 DF
@@ -76,9 +77,12 @@ leftline
 li
 linkcolor
 maximo
+memético
+meméticos
 metaheurística
 minimo
 multispectral
+num
 numbersep
 numberstyle
 numeroAtributos
@@ -89,8 +93,6 @@ pdfauthor
 pdftitle
 rulecolor
 rw
-scr
-scr
 showstringspaces
 src
 ssec
@@ -104,6 +106,7 @@ utf
 utils
 vectorDeCeros
 xleftmargin
+ésima
 ésimo
-memético
-num
+Makefile
+subóptimas

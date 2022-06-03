@@ -67,7 +67,7 @@
 \usepackage[heuristica,vvarbb,bigdelims]{newtxmath}
 \usepackage[T1]{fontenc}
 \renewcommand*\oldstylenums[1]{\textosf{#1}}
-\usepackage[spanish]{babel}
+\usepackage[spanish,es-tabla]{babel}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINICIÓN DE COLORES
@@ -283,12 +283,17 @@ Algoritmos Greedy}
 % Práctica 2: 
 \chapter{Práctica 2: Técnicas de Búsqueda basadas en Poblaciones}
 
-% Pseudocódigo de los AGs y los operadores de cruce y mutación.
+% Pseudo código de los AGs y los operadores de cruce y mutación.
 \input{secciones/P2/1_AGG}
 \input{secciones/P2/2_Operadores_cruce} 
 \input{secciones/P2/3_Resultados_algoritmos_geneticos}
 % algoritmo memético 
 \include{secciones/P2/4_Algoritmo_memetico}
-\input {secciones/P2/5_Resultados_algoritmos_memeticos}
+\input{secciones/P2/5_Resultados_algoritmos_memeticos}
+\include{secciones/P2/6_Resultados_finales_p2}
+
+% Práctica 3
+\chapter{Práctica 3: Búsquedas por trayectorias}
+\include{secciones/P3/1_Enfriamiento_simulado}
 
 \end{document}
