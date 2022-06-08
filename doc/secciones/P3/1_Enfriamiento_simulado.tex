@@ -47,3 +47,94 @@ dados como:
 \end{itemize}
 \textcolor{red}{Cambiar esto según convenga}.
 \textbf{Nota: }Se ha seleccionado \textit{máximo de vecinos}$= 10 n$ porque con \textit{máximo de vecinos}$= 10 n$ genera demasiados vecinos por lo general. 
+
+La función \texttt{Heurística Enfriamiento} 
+que es una función booleana que determina si una solución mejor que la actual merece ser considerada. 
+
+\begin{algorithm}[H]
+  \begin{algorithmic}
+    \Procedure{Heuristica Enfriamiento}{ $F_w$, $F_{w_{\textit{antiguo}}}$   t}
+      \State $u \gets$ \textit{valor aleatorio con distribución uniforme en }$[0,1]$ 
+      \State \textbf{return } 
+      $u \leq exp( -\frac{\textit{ diferencia coste }}{K T})$
+    \EndProcedure
+  \end{algorithmic}  
+\end{algorithm} 
+
+
+\textbf{Argumentos del algoritmo de enfriamiento simulado}
+\begin{itemize}
+  \item \textit{tamaño problema}.
+  \item \textit{evaluaciones máximas}.
+  \item \textit{máximo éxitos}.
+  \item \textit{máximo vecinos}. 
+  \item \textit{F}: función de \textit{fitness}.
+  \item $T_f$
+\end{itemize}
+
+
+\begin{algorithm}[H]
+    \caption{Enfriamiento simulado}
+        \hspace*{\algorithmicindent} 
+        \textbf{Salida}:
+        Vector de pesos $w$.        
+    \begin{algorithmic}[1]
+      \Procedure{Enfriamiento Simulado}{
+      Argumentos ya comentados}
+            
+          \State $w \gets$ vector aleatorio   
+          \State \textit{mejor vector} $\gets w$ 
+          \State \textit{evaluaciones} $\gets 0$ \Comment{Indica número de generaciones}
+          \State  \textit{vecinos aceptados} $\gets 1$
+          \State  
+          \begin{equation*}
+              T 
+              \gets
+              \frac{ \mu F(w)}{ - \log(\phi)}
+          \end{equation*}
+          \State \begin{equation*}
+            M \gets \frac{ \textit{máximo evaluaciones }}{\textit{máximo vecinos}}
+          \end{equation*}
+        \State \textit{primera iteración} $\gets True$ 
+        \While{ (\textit{evaluaciones} $<$ \textit{número evaluaciones máximas}
+        $\wedge$
+        \textit{vecinos aceptado} $> 0$
+        $\wedge$
+        $T < T_f$)
+        $\vee$
+        \textit{primera iteración}
+        }
+        \State \textit{vecinos aceptados}  $\gets 0$ 
+        \State \textit{vecinos generados}  $\gets 0$ 
+          \While{\textit{vecinos generados} < \textit{máximo vecinos}
+          $\wedge$ 
+          \textit{vecinos aceptados} < \textit{máximo vecinos aceptados}
+          }
+          \State \textit{primera iteración} $\gets False$ 
+          \State $w_{vecino} \gets$ \texttt{GeneraVecino($w,\sigma$)}
+          \State \textit{vecinos generados} $\gets$ \textit{vecinos generados}$+1$
+          \State 
+          \begin{equation*}
+            \beta \gets 
+            \frac{T -  T_f}{ M (T - T_f)}
+          \end{equation*}
+
+          \If{ $F(w_{vecino}) > F(w)$ o Heurística Enfriamiento($F(w)$, $F(w_{vecino})$, T)}
+            \State $w \gets w_{vecino}$
+            \State \textit{vecinos aceptados} $\gets$ \textit{vecinos aceptados}$+1$
+            \If $F(w_{vecino}) > F(\textit{mejor vector})$
+              \State \textit{mejor vector} $\gets w$. 
+            \EndIf
+          \EndIf
+          \EndWhile
+        \State
+        \begin{equation*}
+          T \gets
+          \frac{T}{1 + \beta T}
+        \end{equation*}
+        \State $evaluaciones \gets evaluaciones +1$
+        \EndWhile
+        \State \textbf{return} \textit{mejor vector}
+      \EndProcedure
+    \end{algorithmic}
+  \end{algorithm}
