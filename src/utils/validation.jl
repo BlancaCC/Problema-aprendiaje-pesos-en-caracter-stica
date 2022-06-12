@@ -145,3 +145,105 @@ function LeaveOneOut(data, labels, learner_algorithm)
     accuracy = accuracy*100/len
     return accuracy
 end
+
+function VerboseCrossValidationS(data, labels, folds_number, learner_algorithm, file_name::String, 
+    umbral_tasa_reduccion=0.1, a = 0.5)
+
+    # Datos que vamos a escribir
+    tamaño = 1+2
+    dfParticion = map( x -> "Partición $x", 1:(tamaño))
+    dfTime = Array{Float64}(undef, tamaño)
+    dfClasificacion = Array{Float64}(undef, tamaño)
+    dfReduccion =  Array{Float64}(undef, tamaño)
+    dfAgregacion = Array{Float64}(undef, tamaño)
+    dfW = Array{Vector{Float64}}(undef, tamaño)
+    # calculate folds 
+    len = length(labels)
+    index = [ 
+        CalculateIndex(folds_number,len,i) for i in 0:folds_number
+        ]
+    lk = ReentrantLock() 
+
+    Threads.@threads for i in 1:1
+        lock(lk)
+            println("Comienza la iteración $i/$folds_number de CV para $file_name")
+        unlock(lk)
+        # select train data and test 
+        train_index = filter(
+            x-> x<= index[i] || x > index[i+1] , 1:len
+        )
+        
+        test_index = (index[i]+1):index[i+1]
+        
+        train_data = data[train_index , :]
+        train_labels = labels[train_index]
+        test_data = data[test_index, :]
+        test_labels = labels[test_index]
+        
+        time = @elapsed begin 
+            # train
+            clasificator, F_w, w = learner_algorithm(train_data, train_labels)
+            # test
+            estimations =  map(clasificator, eachrow(test_data))
+        end
+        # Calculamos la precisión
+        aciertos = sum(estimations .== test_labels)
+        accuracy = (aciertos/ (index[i+1] - index[i]) )* 100
+        # Calculamos tasa de reducción valor entre [0,100]
+        tasa_reducion = 100*sum(
+            map(x-> (x < umbral_tasa_reduccion) ? 1 : 0, w)
+            )/length(w)
+        # Evaluación combinación de ambas
+        evaluacion = a*accuracy + (1-a)*tasa_reducion
+
+        # Guardamos datos que se escribirán en el fichero 
+       #            s -> x1000 ms
+        dfTime[i] = time#*1000
+        dfAgregacion[i] = evaluacion
+        dfClasificacion[i] = accuracy
+        dfReduccion[i] = tasa_reducion
+        dfW[i] = w   
+        lock(lk)
+        # habría que hacer esto con un cerrojo
+            println("------------------------------------")
+            println("Termina iteración $i/$folds_number de CV para $file_name con: 
+            Tiempo (s): $(dfTime[i])  tasa clasificación: $accuracy  tasa reducción: $tasa_reducion agregación: $evaluacion 
+            w = $w\n")
+            println("------------------------------------")
+        unlock(lk)
+ 
+    end
+    # Añadimos medias 
+    # Calculamos las medias
+    folds_number = 1
+    tamaño -=1
+    dfParticion[tamaño] = "Medias "
+    dfTime[tamaño]= mean(dfTime[1:folds_number])
+    dfClasificacion[tamaño]= mean(dfClasificacion[1:folds_number])
+    dfReduccion[tamaño]= mean(dfReduccion[1:folds_number])
+    dfAgregacion[tamaño]= mean(dfAgregacion[1:folds_number])
+    dfW[tamaño]= mean(dfW[1:folds_number])
+    # Calculamos las desviaciones típicas 
+    tamaño += 1
+    dfParticion[tamaño] = "Desviación típica"
+    dfTime[tamaño]= std(dfTime[1:folds_number])
+    dfClasificacion[tamaño]= std(dfClasificacion[1:folds_number])
+    dfReduccion[tamaño]= std(dfReduccion[1:folds_number])
+    dfAgregacion[tamaño]= std(dfAgregacion[1:folds_number])
+    dfW[tamaño]= std(dfW[1:folds_number])
+
+    # Escribimos en el fichero 
+    DF = DataFrame(
+        Nombre_Fila = dfParticion, 
+        Clasificación = dfClasificacion,
+        Reducción = dfReduccion, 
+        Agregación = dfAgregacion, 
+        Tiempo = dfTime,
+        Pesos = dfW
+    )
+    println("Se proceden a escribir en $file_name los datos $DF")
+    CSV.write(file_name, DF)
+
+    return DF
+end
+

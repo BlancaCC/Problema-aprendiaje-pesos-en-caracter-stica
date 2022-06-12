@@ -1,0 +1,114 @@
+%%%%%
+% Conclusiones 
+%%%%%%%
+
+\section{Conclusiones finales}
+
+El resumen de resultados es el siguiente: 
+
+\begin{table}[H]
+    \centering
+    \resizebox{\columnwidth}{!}{%
+      \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c| }
+     \hline
+     & \multicolumn{4}{|c|}{\textit{Ionosphere}} 
+     & \multicolumn{4}{|c|}{\textit{Parkinsons}} 
+     &\multicolumn{4}{|c|}{\textit{Spectf-heart}}\\
+     \hline
+       Algoritmo
+       & $\%\_$clas & $\%\_$red & Agr. & T (s) 
+       & $\%\_$clas & $\%\_$red & Agr. & T (s)  
+       & $\%\_$clas & $\%\_$red & Agr. & T (s) 
+       \\ \hline
+    % Algoritmo práctica primera 
+    1NN base
+    & 86.044 &0 & 43.022 & 4.623 $\times 10^-3$
+    & 95.897& 0 & 47.948   &2.312$\times 10^-3$ 
+    & 82.522 & 0 & 41.261   & 4.109$\times 10^-3$ 
+    \\ \hline
+
+    Búsqueda local
+    & 85.191 & 27.059 & 56.125  &  154.672  
+    & 92.821 &  27.059  & 58.228 & 41.035
+    & 82.807 &  20.455 & 51.631 & 357.893
+    \\ \hline
+
+    Greedy
+    & 83.751 & 2.941 & 43.346& 49.051 $\times 10^-3$
+    & 95.385 & 0 & 47.692 &  13.424$\times 10^-3$
+    & 83.959 & 0&41.979 &56.008 $\times 10^-3$
+    \\ \hline
+        
+    Enfriamiento Simulado 
+    & 87,1911 & 49,4118 & 68,3015 & 1,0614 
+    & 91,2821 & 44,5455 & 67,9138 & 0,1768 
+    & 84,244 & 50,000 & 67,122 & 1,451 
+    \\ \hline
+    BLM
+    & 86,893 & 22,353 & 54,623 & 3151,607
+    & 92,308 & 26,364 & 59,336 & 600,364 
+    & 83,085 & 25,909 & 54,497 & 3975,145 
+    \\ \hline
+    ILS
+    & 87,324 & 11,765 & 49,544 & 2660,953 
+    & 94,359 & 23,636 & 58,998 & 562,400
+    & 84.2857  & 31.8182   &  58.0519  & 4456.77 
+    \\ \hline
+    %corazón
+
+    \end{tabular}
+    }
+    \caption{Comparativas algoritmos capítulo 1 y capítulo 3}
+    \label{Tabla:comparativas-algoritmos-P3}
+\end{table}
+
+\subsection*{Reflexiones}
+
+\textbf{\textit{Enfriamiento simulado: parada en tiempo justo}}
+
+A la vista de los resultados mostrados resulta 
+ser mejor el algoritmo de enfriamiento simulado,
+no solo en resultados de agregación si no también en los tiempo tan competitivos
+(¡Próximos al segundo!). 
+
+Se podría uno preguntar si ampliando el tiempo de búsqueda,
+la agregación mejoraría para el algoritmo de enfriamiento simulado. 
+Por probabilidad, al aumentar el espacio de búsqueda la respuesta sería afirmativa con una gran probabilidad
+(variaría en función de la base de datos si la mejora fuera mejor o peor). Pero por ser una 
+variante muy similar a búsqueda local su capacidad 
+de mejora está acotada y a la vista del capítulo 2 
+difícilmente podrá superar a algoritmos genéticos. 
+Sin embargo, ésta metaheurística presenta un punto fuerte 
+muy poderoso: la relación resultado tiempo. 
+
+Puesto que la idea es muy similar a la del algoritmo de búsqueda local y puesto que los tiempos son muy diferentes se podría concluir que 
+el algoritmo de enfriamiento es la mejor heurística 
+encontrada para optimizar el tiempo de búsqueda, 
+es decir saber cuándo se ha alcanzado un máximo local. 
+
+\textbf{\textit{Caer 15 veces en la misma piedra}}
+
+
+Las metaheurísticas de Búsqueda Local Multiarranque y Búsqueda Local Reiterada presentan una relación 
+resultados tiempos similares y bastantes malas; ya que en cuanto 
+resultado de agregación son muy similares a búsqueda local 
+pero los tiempo son mayores.
+
+Era de espera que los tiempos de estos fueran mayores, ya que en comparación con Búsqueda Local,
+aunque se reduce el número de evaluaciones de la 
+función de activación se está reiterando el 
+algoritmo $15$ veces.  
+
+Las conclusiones que uno puede dilucidad de esta situación es que si la metaheurística de la que se parte tiene un resultado promedio de $x$ dependiente aunque sea dependiente de un valor aleatorio, puesto que el espacio de búsqueda es muy grande, lo más probable es que aunque repitamos la metaheurística varias veces el resultado será muy 
+similar a $x$. 
+
+Es también llamativo comparar BLM y ILS entre ellos, aunque no se ha hecho ningún contraste de hipótesis para comparar si verdaderamente sus diferencias en agregación y tiempo son diferentes , 
+puede apreciarse una tendencia mejor en BLM.
+
+
+Esto puede deberse a que si el problema presenta muchos máximos locales, es mejor contemplar inicios distintos que intentar optimizar con mutaciones el ya encontrado. Un claro ejemplo de esta estrategia 
+y sus ventajas son las metaheurísticas mostradas en 
+el capítulo segundo. 
+
+
+Como moraleja de este capítulo se podría uno queda con  que no esperemos grandes mejoras en los resultados si utilizamos heurísticas muy similares, pero puede ser muy interesante saber cuándo detener la búsqueda. 

@@ -1,0 +1,91 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Búsqueda multi arranque básica
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Búsqueda Local Multiarranque}  
+
+\subsection{Descripción }
+
+Se generan 15 soluciones aleatorias
+iniciales con el algoritmo de Búsqueda Local y optimizar cada una de ellas con el algoritmo
+de búsqueda local. 
+
+Se devolverá la mejor solución encontrada en todo
+el proceso. 
+
+\subsection{Resultados}
+\subsubsection{Ionosphere}
+\begin{table}[!ht]
+    \centering
+    \caption{Búsqueda Local Multiarranque Ionosphere}
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+        Nombre Fila & Clasificación & Reducción & Agregación & Tiempo \\ \hline
+        Partición 1 & 87,324 & 26,471 & 56,897 & 3279,619 \\ \hline
+        Partición 2 & 92,857 & 23,529 & 58,193 & 3275,576 \\ \hline
+        Partición 3 & 82,857 & 14,706 & 48,782 & 3023,867 \\ \hline
+        Partición 4 & 81,429 & 29,412 & 55,420 & 3125,478 \\ \hline
+        Partición 5 & 90,000 & 17,647 & 53,824 & 3053,495 \\ \hline
+        Medias  & 86,893 & 22,353 & 54,623 & 3151,607 \\ \hline
+        Desviación típica & 4,784 & 6,099 & 3,651 & 120,811 \\ \hline
+    \end{tabular}
+    \label{BLB-Ionosphere}
+\end{table}
+\subsubsection{Parkinson}
+\begin{table}[!ht]
+    \centering
+    \caption{Búsqueda Local Multiarranque Parkinson}
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+        Nombre Fila & Clasificación & Reducción & Agregación & Tiempo \\ \hline
+        Partición 1 & 89,744 & 40,909 & 65,326 & 562,730 \\ \hline
+        Partición 2 & 97,436 & 27,273 & 62,354 & 634,176 \\ \hline
+        Partición 3 & 92,308 & 22,727 & 57,517 & 565,581 \\ \hline
+        Partición 4 & 92,308 & 22,727 & 57,517 & 561,459 \\ \hline
+        Partición 5 & 89,744 & 18,182 & 53,963 & 677,873 \\ \hline
+        Medias  & 92,308 & 26,364 & 59,336 & 600,364 \\ \hline
+        Desviación típica & 3,140 & 8,743 & 4,486 & 53,129 \\ \hline
+    \end{tabular}
+    \label{BLB-Parkinson}
+\end{table}
+
+
+\subsubsection{Spectf Heart}
+
+\begin{table}[!ht]
+    \centering
+    \caption{Búsqueda Local Multiarranque Spectf Heart}
+    \begin{tabular}{|l|l|l|l|l|}
+    \hline
+        Nombre Fila & Clasificación & Reducción & Agregación & Tiempo \\ \hline
+        Partición 1 & 80,000 & 29,545 & 54,773 & 4190,116 \\ \hline
+        Partición 2 & 77,143 & 31,818 & 54,481 & 3910,688 \\ \hline
+        Partición 3 & 84,286 & 27,273 & 55,779 & 3704,032 \\ \hline
+        Partición 4 & 94,286 & 20,455 & 57,370 & 4161,981 \\ \hline
+        Partición 5 & 79,710 & 20,455 & 50,082 & 3908,906 \\ \hline
+        Medias  & 83,085 & 25,909 & 54,497 & 3975,145 \\ \hline
+        Desviación típica & 6,766 & 5,232 & 2,714 & 201,968 \\ \hline
+    \end{tabular}
+    \label{BLB-hert}
+\end{table}
+
+\subsection{Conclusión}  
+
+Los resultados en cuanto a tiempo bondad de la agregación 
+son bastante malos, daremos una explicación de ésto en las conclusiones 
+finales del proyecto; la idea intuitiva es 
+que su potencial de encontrar soluciones buenas 
+está limitado al de Búsqueda local. 
+
+Es decir, si Búsqueda Local para un conjunto de datos produce 
+una agregación de $x$ con desviación típica $d$. Al realizar 
+más ejecuciones del mismo algoritmo se vería \textit{limitado} a tal distribución. Esto es, por 
+el Teorema Central del Límite, los 
+resultados provenientes de BLB seguirían una distribución normal y entonces, la probabilidad 
+de mejorar considerablemente  los resultados de Búsqueda Local 
+es la misma que la de encontrar un \textit{outlier} en la distribución 
+normal de media $x$ y desviación típica $d$. 
+
+
+
+

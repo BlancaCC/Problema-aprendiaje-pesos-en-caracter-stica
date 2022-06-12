@@ -14,10 +14,11 @@ function PrimeroMejor(numero_maximo_vecinos_sin_mejora::Int,
     evaluaciones_maximas_funcion_objetivo::Int,
     numero_atributos::Int, 
     umbral_atributo::Real, 
-    F)::Vector{<:Real}
-
-    w = rand(numero_atributos) # vector de tamaño atributo uniformement inicializado
-
+    F,
+    w = 0)::Vector{<:Real}
+    if (w == 0)
+        w = rand(numero_atributos) # vector de tamaño atributo uniformement inicializado
+    end
     # Ponemos a cero atributos menores que umbral atributo
     w = map(x-> (x<umbral_atributo) ? 0 : x , w)
 

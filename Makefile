@@ -1,4 +1,8 @@
 all: compile
+result_p3_es:
+	julia --project=. --threads 2 src/resultados/Enfriamiento-Simulado/Enfriamiento-Simulado.jl
+	julia --project=. --threads 2 src/resultados/BMB/BMB.jl
+	julia --project=. --threads 2 src/resultados/ILS/ILS.jl
 
 result_p2_geneticos:
 	julia --project=. --threads 2 src/resultados/Genéticos/AGG/BLX/AGG_BLX.jl

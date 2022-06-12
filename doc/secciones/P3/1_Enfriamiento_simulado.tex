@@ -48,12 +48,13 @@ dados como:
 \textcolor{red}{Cambiar esto según convenga}.
 \textbf{Nota: }Se ha seleccionado \textit{máximo de vecinos}$= 10 n$ porque con \textit{máximo de vecinos}$= 10 n$ genera demasiados vecinos por lo general. 
 
+\newpage
 La función \texttt{Heurística Enfriamiento} 
 que es una función booleana que determina si una solución mejor que la actual merece ser considerada. 
 
 \begin{algorithm}[H]
   \begin{algorithmic}
-    \Procedure{Heuristica Enfriamiento}{ $F_w$, $F_{w_{\textit{antiguo}}}$   t}
+    \Procedure{Heurística Enfriamiento}{ $F_w$, $F_{w_{\textit{antiguo}}}$   t}
       \State $u \gets$ \textit{valor aleatorio con distribución uniforme en }$[0,1]$ 
       \State \textbf{return } 
       $u \leq exp( -\frac{\textit{ diferencia coste }}{K T})$
@@ -71,7 +72,8 @@ que es una función booleana que determina si una solución mejor que la actual 
   \item \textit{F}: función de \textit{fitness}.
   \item $T_f$
 \end{itemize}
-
+para el peseudocódigo siguiente: 
+\newpage
 
 \begin{algorithm}[H]
     \caption{Enfriamiento simulado}
@@ -100,29 +102,29 @@ que es una función booleana que determina si una solución mejor que la actual 
         $\wedge$
         \textit{vecinos aceptado} $> 0$
         $\wedge$
-        $T < T_f$)
+        $T > T_f$
         $\vee$
         \textit{primera iteración}
         }
+        \State \textit{primera iteración} $\gets False$ 
         \State \textit{vecinos aceptados}  $\gets 0$ 
         \State \textit{vecinos generados}  $\gets 0$ 
           \While{\textit{vecinos generados} < \textit{máximo vecinos}
           $\wedge$ 
           \textit{vecinos aceptados} < \textit{máximo vecinos aceptados}
           }
-          \State \textit{primera iteración} $\gets False$ 
           \State $w_{vecino} \gets$ \texttt{GeneraVecino($w,\sigma$)}
           \State \textit{vecinos generados} $\gets$ \textit{vecinos generados}$+1$
           \State 
           \begin{equation*}
             \beta \gets 
-            \frac{T -  T_f}{ M (T - T_f)}
+            \frac{T -  T_f}{ M * T * T_f}
           \end{equation*}
 
           \If{ $F(w_{vecino}) > F(w)$ o Heurística Enfriamiento($F(w)$, $F(w_{vecino})$, T)}
             \State $w \gets w_{vecino}$
             \State \textit{vecinos aceptados} $\gets$ \textit{vecinos aceptados}$+1$
-            \If $F(w_{vecino}) > F(\textit{mejor vector})$
+            \If{$F(w_{vecino}) > F(\textit{mejor vector})$}
               \State \textit{mejor vector} $\gets w$. 
             \EndIf
           \EndIf
@@ -138,3 +140,65 @@ que es una función booleana que determina si una solución mejor que la actual 
       \EndProcedure
     \end{algorithmic}
   \end{algorithm}
+
+\subsection{Resultados}
+\subsubsection{Ionosphere}
+\begin{table}[H]
+  \centering
+  \caption{Enfriamiento Simulado Ionosphere} 
+  \begin{tabular}{|l|l|l|l|l|}
+  \hline
+      Nombre Fila & Clasificación & Reducción & Agregación & Tiempo \\ \hline
+      Partición 1 & 83,0986 & 52,9412 & 68,0199 & 1,2418 \\ \hline
+      Partición 2 & 91,4286 & 47,0588 & 69,2437 & 1,0131 \\ \hline
+      Partición 3 & 85,7143 & 52,9412 & 69,3277 & 0,7830 \\ \hline
+      Partición 4 & 87,1429 & 44,1176 & 65,6303 & 1,2433 \\ \hline
+      Partición 5 & 88,5714 & 50,0000 & 69,2857 & 1,0259 \\ \hline
+      Medias  & 87,1911 & 49,4118 & 68,3015 & 1,0614 \\ \hline
+      Desviación típica & 3,1142 & 3,8348 & 1,5909 & 0,1915 \\ \hline
+  \end{tabular}
+  \label{enfriamiento-simulado-ionosfere}
+\end{table}
+\subsubsection{Parkinson}
+\begin{table}[H]
+  \centering
+  \caption{Enfriamiento Simulado Parkinson}
+  \begin{tabular}{|l|l|l|l|l|}
+  \hline
+      Nombre Fila & Clasificación & Reducción & Agregación & Tiempo \\ \hline
+      Partición 1 & 94,8718 & 40,9091 & 67,8904 & 0,1859 \\ \hline
+      Partición 2 & 100,0000 & 45,4545 & 72,7273 & 0,1821 \\ \hline
+      Partición 3 & 82,0513 & 40,9091 & 61,4802 & 0,1462 \\ \hline
+      Partición 4 & 89,7436 & 45,4545 & 67,5991 & 0,1878 \\ \hline
+      Partición 5 & 89,7436 & 50,0000 & 69,8718 & 0,1821 \\ \hline
+      Medias  & 91,2821 & 44,5455 & 67,9138 & 0,1768 \\ \hline
+      Desviación típica & 6,6864 & 3,8030 & 4,1381 & 0,0173 \\ \hline
+  \end{tabular}
+  \label{enfriamiento-simulado-Parkinson}
+\end{table}
+\subsubsection{Spectf Heart}
+\begin{table}[H]
+  \centering
+  \caption{Enfriamiento Simulado Spectf Heart}
+  \begin{tabular}{|l|l|l|l|l|}
+  \hline
+      Nombre Fila & Clasificación & Reducción & Agregación & Tiempo \\ \hline
+      Partición 1 & 77,143 & 40,909 & 59,026 & 1,566 \\ \hline
+      Partición 2 & 85,714 & 50,000 & 67,857 & 1,488 \\ \hline
+      Partición 3 & 85,714 & 54,545 & 70,130 & 1,127 \\ \hline
+      Partición 4 & 87,143 & 47,727 & 67,435 & 1,569 \\ \hline
+      Partición 5 & 85,507 & 56,818 & 71,163 & 1,504 \\ \hline
+      Medias  & 84,244 & 50,000 & 67,122 & 1,451 \\ \hline
+      Desviación típica & 4,023 & 6,224 & 4,784 & 0,184 \\ \hline
+  \end{tabular}
+  \label{enfriamiento-simulado-heart}
+\end{table}
+
+\subsection{Conclusiones del Enfriamiento Simulado}  
+
+Hay dos detalles llamativos en este algoritmo, el primero son 
+los malos resultados obtenidos que en comparativa con los
+del capítulo segundo son  mediocres, sin embargo
+tiempo que ocupan en realizarse es muy poco tiempo.
+
+Podría uno pensar que entonces, si se hubiera detenido después el resultado podría haber sido mejor, responderemos a esta cuestión en las conclusiones finales. 

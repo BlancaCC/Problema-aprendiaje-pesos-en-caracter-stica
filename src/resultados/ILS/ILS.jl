@@ -4,7 +4,7 @@ using Random
 ## Leer datos 
 include("../../utils/preprocesado_datos.jl")
 include("../../utils/validation.jl")
-include("../../algoritmo-enfriamiento/enfriamiento-simulado.jl")
+include("../../ILS/ILS.jl")
 
 file_path= "src/Instancias_APC/"
 struct DataFile
@@ -18,8 +18,8 @@ files = [
     DataFile(file_path*"spectf-heart.arff", "Class"),
 ]
 # ¡Tiene que acabar en /
-csv_file_path  = "src/resultados/Enfriamiento-Simulado/"
-prefijo = "ES-"
+csv_file_path  = "src/resultados/ILS/"
+prefijo = "ILS-"
 process_name = [
     DataFile(csv_file_path*prefijo*"ionosphere.result.csv", "Datos Iosfera"),
     DataFile(csv_file_path*prefijo*"parkinsons.result.csv", "Datos parkinson "),
@@ -27,8 +27,18 @@ process_name = [
 ]
 Random.seed!(0)
 println("Procedemos a calcular los datos con $(Threads.nthreads()) hebras disponibles")
-
-for i in 1:length(files)
+# Leemos los argumentos para saber el fichero que se quiere ejecutar 
+# si el argumento no existe, hay ambigüedad o no es un ínice de ficheros se ejecutan todos
+if length(ARGS) == 1 && parse(Int,ARGS[1]) in [1,2,3]
+    n = parse( Int, ARGS[1] )
+    inicio = n
+    final = n
+else
+    inicio = 1
+    final = length(files)
+end
+    
+for i in inicio:final
     # Seleccionamos parkinson
     file = files[i]
     data , labels = DataLabelArff(file.route, file.class_atributte)
@@ -37,5 +47,5 @@ for i in 1:length(files)
     println("$(process_name[i].class_atributte)")
 
     ## Evaluar resultado con cross validation 
-    VerboseCrossValidation(data, labels, 5, EnfriamientoSimulado_LearnerOneNN, process_name[i].route)
+    VerboseCrossValidationS(data, labels, 5, ILS_LearnerOneNN, process_name[i].route)
 end
