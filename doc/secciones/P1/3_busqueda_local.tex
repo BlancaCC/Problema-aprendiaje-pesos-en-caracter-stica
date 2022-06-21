@@ -1,5 +1,5 @@
 \section{Algoritmo de búsqueda local}  
-
+\label{algoritmo-busqueda-local}
 No es difícil pensar que no todos los atributos tengan la misma relevancia que otros, es por ellos que podría refinarse la distancia usada en $1-$NN por una ponderada como 
 
 \begin{equation}
@@ -54,7 +54,7 @@ Las métricas a observar de nuestro algoritmo son:
 \end{itemize}
 
 \subsection{Búsqueda local del primero mejor}  
-
+\label{primero-mejor}
 El algoritmo que vamos a usar es el conocido como el del \textit{primero mejor} y que radica en esencia de que  cuanto se genera 
 una solución que mejora a la actual se aplica el movimiento y se pasa a la siguiente iteración.
 
@@ -76,10 +76,12 @@ la función \texttt{GeneraVecino($w,\sigma$)} que devolverá un vector
         \textbf{Salida}:
         Vector de pesos $w_{vecino}$.        
     \begin{algorithmic}[1]
-      \Procedure{GeneraVecino}{$w$,}   
-          \State $z \gets \mathcal{N}(0, \sigma)_{1 \times n}$
+      \Procedure{GeneraVecino}{$w$,$z \in \{null, vector\}$}   
+         \If{$z$ es $null$ } 
+          $z \gets \mathcal{N}(0, \sigma)_{1 \times n}$
           \Comment{vector generado a partir de distribución normal de media 0 y desviación típica $\sigma$}
-        \For{$i \in \{1, \ldots, n\}$}
+        \EndIf
+          \For{$i \in \{1, \ldots, n\}$}
         \Comment{Truncamos entre cero y uno cada componente}
           \State $w_{vecino}[i] \gets \max(0, \min(1, w[i]-z[i]))$
         \EndFor
